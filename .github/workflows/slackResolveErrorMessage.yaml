@@ -1,4 +1,4 @@
-name: Slack Error Message
+name: Slack Error Resolve Message
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  notify:
+  notify-resolve:
     runs-on: ubuntu-latest
 
     steps:
