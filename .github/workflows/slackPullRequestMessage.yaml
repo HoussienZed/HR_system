@@ -1,4 +1,4 @@
-name: Slack Error Message
+name: Slack Pull Request Message
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  notify-error:
+  notify-resolve:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,7 +14,7 @@ jobs:
         id: check_message
         run: |
           commit_message="${{ github.event.head_commit.message }}"
-          if echo "$commit_message" | grep -q "Faced an error"; then
+          if echo "$commit_message" | grep -q "Pull Request"; then
             echo "send_notification=true" >> $GITHUB_ENV
           else
             echo "send_notification=false" >> $GITHUB_ENV
@@ -29,7 +29,7 @@ jobs:
           payload: |
             channel: "#slack-test"
             text: |
-              ⚠️ **An error was encountered in the `${{ github.ref_name }}` branch!**
+              ✅ **Pull Request initiated from `${{ github.ref_name }}` branch! See the commit message below**
               - **Commit Number:** `${{ github.sha }}`
               - **Commit Message:** `${{ github.event.head_commit.message }}`
               - **Committed by:** `${{ github.actor }}`
