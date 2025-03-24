@@ -23,6 +23,7 @@ class AuthController extends Controller{
 
         $user = Auth::user();
         $user->token=$token;
+        die($user);
         return messageResponse(true, "Login Successful", 200, $user);
         // return messageResponse(true, "Login Successful", 200, [
         //     'user' => $user,
