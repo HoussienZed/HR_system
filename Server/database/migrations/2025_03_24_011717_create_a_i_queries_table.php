@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('a_i_queries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->text('question');
+            $table->text('answer')->nullable();
             $table->timestamps();
         });
     }
