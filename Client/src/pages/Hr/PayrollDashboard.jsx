@@ -22,7 +22,7 @@ const PayrollDashboard = () => {
         <h1 className="payroll-dashboard-title">Payroll Dashboard</h1>
 
         <div className="flex gap-4 w-full cards-container">
-          <div className="card flex flex-column flex-center gap-8 text-white bg-primary ">
+          <div className="card flex flex-column flex-center gap-8 text-white rounded-ld bg-primary ">
             <h4>Total Salaries Paid</h4>
             <div>
               <p>
@@ -31,7 +31,7 @@ const PayrollDashboard = () => {
               </p>
             </div>
           </div>
-          <div className="card flex flex-column flex-center gap-8 text-white bg-primary">
+          <div className="card flex flex-column flex-center gap-8 text-white rounded-ld bg-primary">
             <h4>Total Employees</h4>
             <div>
               <p>
@@ -40,7 +40,7 @@ const PayrollDashboard = () => {
               </p>
             </div>
           </div>
-          <div className="card flex flex-column flex-center gap-8 text-white bg-primary">
+          <div className="card flex flex-column flex-center gap-8 text-white rounded-ld bg-primary">
             <h4>Total Income</h4>
             <div>
               <p>
@@ -49,7 +49,7 @@ const PayrollDashboard = () => {
               </p>
             </div>
           </div>
-          <div className="card flex flex-column flex-center gap-8 text-white bg-primary">
+          <div className="card flex flex-column flex-center gap-8 text-white rounded-ld bg-primary">
             <h4>Total Taxes Deducted</h4>
             <div>
               <p>
