@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('onboardings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('candidate_id')->constrained('candidates')->onDelete('cascade');
+            $table->date('start_date');
+            $table->enum('status', ['completed', 'in progress']);
             $table->timestamps();
         });
     }
