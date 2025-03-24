@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('benefits', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->decimal('experience_bonus', 10, 2)->default(0);
+            $table->decimal('special_allowance', 10, 2)->default(0);
+            $table->decimal('appraisal', 10, 2)->default(0);
             $table->timestamps();
         });
     }
