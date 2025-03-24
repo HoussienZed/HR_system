@@ -272,9 +272,18 @@ nav {
   :root {
       --container-padding-x: 5rem;
   }
+
 }
 @media (width > 992px) {
   :root {
     --container-padding-x: 10rem;
+
+  
+  #root {
+    height: 100%;
+    display: flex;
+    gap: 1em;
+    
+
   }
 }
