@@ -45,6 +45,7 @@ body {
 
 nav {
   height: 100%;
+  width: 300px;
 }
 
 #root {
@@ -262,6 +263,7 @@ nav {
   padding-left: var(--container-padding-x);
   margin-right: auto;
   margin-left: auto;
+  padding-top: 2rem;
 }
 
 
@@ -270,20 +272,12 @@ nav {
 
 @media (width > 600px) {
   :root {
-      --container-padding-x: 5rem;
+      --container-padding-x: 2rem;
   }
 
 }
 @media (width > 992px) {
   :root {
-    --container-padding-x: 10rem;
-
-  
-  #root {
-    height: 100%;
-    display: flex;
-    gap: 1em;
-    
-
+    --container-padding-x: 2rem;
   }
 }

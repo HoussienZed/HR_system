@@ -12,9 +12,9 @@ import {
 } from "lucide-react";
 import logo from "../../../assets/logo.png";
 
-const SideNavbar = () => {
+const SideBar = () => {
   return (
-    <nav>
+    <nav className="bg-primary">
       <ul className="side-navbar-list">
         <li className="side-navbar-logo">
           {<img src={logo} className="hrflow-logo" alt="HR_Flow" />}
@@ -57,4 +57,4 @@ const SideNavbar = () => {
   );
 };
 
-export default SideNavbar;
+export default SideBar;
