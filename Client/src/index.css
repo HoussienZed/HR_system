@@ -1,0 +1,41 @@
+:root {
+    --primary-color: #0866FF;  
+    --secondary-color: #42B72A; 
+    --tertiary-color: #E5F3FF;
+    --form-input-border: #F0F0F0;
+    --white-color: #fff;
+    --black-color: #000;
+  }
+  
+  :root { font-family: 'Inter', sans-serif; }
+  @supports (font-variation-settings: normal) {
+    :root { font-family: 'Inter var', sans-serif; }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    background-color: var(--tertiary-color);
+    height: 100%;
+  }
+
+  body {
+    height: 100%;
+    width: 100%;
+  }
+
+  nav {
+    height: 100%;
+  }
+  
+  #root {
+    height: 100%;
+    display: flex;
+    gap: 1em;
+    
+  }
+  
