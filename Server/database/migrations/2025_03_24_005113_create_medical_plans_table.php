@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('medical_plans', function (Blueprint $table) {
             $table->id();
+            $table->enum('plan', ['none', 'prime', 'classic', 'essential']);
+            $table->enum('yearly_cost', ['0', '800', '1200', '1500']);
             $table->timestamps();
         });
     }
