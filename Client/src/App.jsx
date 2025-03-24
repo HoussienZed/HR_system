@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
+import SideNavbar from "./assets/component/side-navbar";
+import Login from "./assets/pages/Login";
+import ProtectedRoutes from "./assets/component/ProtectedRoutes";
+import HrProtectedRoutes from "./assets/component/HrProtectedRoutes";
+import PayrollDashboard from "./assets/pages/PayrollDashboard";
+import EmployeePayroll from "./assets/pages/EmployeePayroll";
+import BenefitsDashboard from "./assets/pages/BenefitsDashboard";
+import EditBenefits from "./assets/pages/EditBenefits";
+import RetirementCalculator from "./assets/pages/RetirementCalculator";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <BrowserRouter>
+        <Routes>
+          {/*Public route for the landing page */}
+          <Route path="/login" element={<Login />} />
 
-export default App
+          {/*protected routes, only users access */}
+          <Route element={<ProtectedRoutes />}>
+            <Route
+              element={
+                <>
+                  <SideNavbar />
+                  <Outlet />
+                </>
+              }
+            >
+              <Route path="employeepayroll" element={<EmployeePayroll />} />
+              <Route
+                path="/benefitsdashboard"
+                element={<BenefitsDashboard />}
+              />
+              <Route path="/editbenefits" element={<EditBenefits />} />
+              <Route
+                path="/retirementcalculator"
+                element={<RetirementCalculator />}
+              />
+            </Route>
+
+            {/*routes for HRs access only */}
+            <Route element={<HrProtectedRoutes />}>
+              <Route
+                element={
+                  <>
+                    <SideNavbar />
+                    <Outlet />
+                  </>
+                }
+              >
+                <Route
+                  path="/payrolldashboard"
+                  element={<PayrollDashboard />}
+                ></Route>
+              </Route>
+            </Route>
+          </Route>
+          {/* </Route> */}
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+};
+
+export default App;

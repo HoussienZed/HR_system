@@ -27,7 +27,7 @@ jobs:
           method: chat.postMessage
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
-            channel: "#slack-test"
+            channel: "#fse_3334_team4"
             text: |
               ✅ **Pull Request initiated from `${{ github.ref_name }}` branch! See the commit message below**
               - **Commit Number:** `${{ github.sha }}`
