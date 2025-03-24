@@ -1,5 +1,7 @@
+import { Outlet } from "react-router-dom";
+
 const ProtectedRoutes = () => {
-  return;
+  return <Outlet />;
 };
 
 export default ProtectedRoutes;

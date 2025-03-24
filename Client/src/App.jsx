@@ -5,6 +5,7 @@ import ProtectedRoutes from "./assets/component/ProtectedRoutes";
 import HrProtectedRoutes from "./assets/component/HrProtectedRoutes";
 import PayrollDashboard from "./assets/pages/PayrollDashboard";
 import EmployeePayroll from "./assets/pages/EmployeePayroll";
+import BenefitsDashboard from "./assets/pages/BenefitsDashboard";
 import EditBenefits from "./assets/pages/EditBenefits";
 import RetirementCalculator from "./assets/pages/RetirementCalculator";
 
@@ -41,9 +42,18 @@ const App = () => {
             {/*routes for HRs access only */}
             <Route element={<HrProtectedRoutes />}>
               <Route
-                path="/payrolldashboard"
-                element={<PayrollDashboard />}
-              ></Route>
+                element={
+                  <>
+                    <SideNavbar />
+                    <Outlet />
+                  </>
+                }
+              >
+                <Route
+                  path="/payrolldashboard"
+                  element={<PayrollDashboard />}
+                ></Route>
+              </Route>
             </Route>
           </Route>
           {/* </Route> */}
