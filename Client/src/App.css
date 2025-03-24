@@ -1,0 +1,46 @@
+.btn{
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-danger{
+  background-color: red;
+}
+.btn > p {
+    padding: 0.5em 0.7em;
+    display: flex;
+    gap: 0.2em;
+}
+.btn > a {
+    padding: 0.5em 0.7em;
+    display: flex;
+    gap: 0.2em;
+    text-decoration: none;
+}
+
+.btn > img{
+    padding: 0.5em 0.5em;
+    cursor: pointer;
+}
+
+input[type="button"]{
+    cursor: pointer;
+}
+
+
+.header{
+  gap: 0.5rem;
+  height: 85px;  
+}
+
+.nav > ul {
+  gap: 2rem;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+/* a:visited{
+  color: white;
+} */
