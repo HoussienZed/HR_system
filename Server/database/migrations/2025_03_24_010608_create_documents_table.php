@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('document_name', 255);
+            $table->string('document_path', 255);
+            $table->enum('type', ['contract', 'certificate', 'id']);
             $table->timestamps();
         });
     }
