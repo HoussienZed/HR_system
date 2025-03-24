@@ -2,7 +2,7 @@
     list-style: none;
     background-color: var(--primary-color);
     width: 300px;
-    color: var(--white-color);
+    color: white;
     height: 100%;
     padding: 3em;
     display: flex;
