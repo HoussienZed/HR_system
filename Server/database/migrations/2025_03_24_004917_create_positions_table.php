@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
+            $table->enum('title', ['assistant', 'officer', 'coordinator', 'manager']);
+            $table->decimal('base_salary', 10, 2);
+            $table->integer('yearly_leave');
             $table->timestamps();
         });
     }
