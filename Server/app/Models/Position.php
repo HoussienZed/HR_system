@@ -9,4 +9,9 @@ class Position extends Model
 {
     /** @use HasFactory<\Database\Factories\PositionFactory> */
     use HasFactory;
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
