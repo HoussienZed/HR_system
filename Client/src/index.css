@@ -180,6 +180,9 @@ nav {
 .items-center{
   align-items: center;
 }
+.items-end{
+  align-items: end;
+}
 @media (width > 640px) {
   .sm-flex-row {
     flex-direction: row;
@@ -222,6 +225,9 @@ nav {
 .h-full{
   height: 100%;
 }
+.h-fit{
+  height: fit-content;
+}
 .gap-2{
   gap: 0.5rem;
 }
@@ -230,6 +236,41 @@ nav {
 }
 .gap-8{
   gap: 2rem;
+}
+.gap-16{
+  gap: 4rem;
+}
+
+
+
+/************** padding and margin */
+.px-4{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.py-4{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.px-8{
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.py-8{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.px-12{
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+.py-12{
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.mt-8{
+  margin-top: 4rem;
 }
 
 

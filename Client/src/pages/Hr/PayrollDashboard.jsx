@@ -9,13 +9,54 @@ import {
 import "../../assets/styles/payrollDashboard.css";
 import Input from "../../component/others/Input";
 import { useState } from "react";
-import Users from "../../component/others/users-table";
+import EmployeesTable from "../../component/others/users-table";
 import Button from "../../component/others/Button";
 import axios from "axios";
 import axiosBaseUrl from "../../utils/axios";
+import { UserRoundPen } from "lucide-react";
 
 const PayrollDashboard = () => {
   const [search, setSearch] = useState("");
+
+  const employees = [
+    {
+      id: 1,
+      full_name: "ali",
+      email: "example@example.com",
+      gender: "male",
+      position: "manager",
+      department: "tech",
+      salary: "1500",
+      status: "active",
+    },
+    {
+      id: 1,
+      full_name: "aop",
+      email: "example@example.com",
+      gender: "male",
+      position: "manager",
+      department: "tech",
+      salary: "1500",
+      status: "active",
+    },
+    {
+      id: 3,
+      full_name: "aloli",
+      email: "example@example.com",
+      gender: "male",
+      position: "manager",
+      department: "tech",
+      salary: "1500",
+      status: "active",
+    },
+  ];
+
+  const actions = [
+    {
+      label: <UserRoundPen />,
+      handler: (employee) => alert("editing employee"),
+    },
+  ];
 
   /* const handleTotalSalaries = async () => {
     const response = await axiosBaseUrl.get("/employees");
@@ -63,7 +104,7 @@ const PayrollDashboard = () => {
     return totalTaxes;
   };
  */
-  const handelViewMyPayroll = () => {};
+  const handleViewMyPayroll = () => {};
   return (
     <>
       <div className="flex-column">
@@ -118,12 +159,18 @@ const PayrollDashboard = () => {
           />
         </div>
         <div className="payroll-dashboard-users">
-          <Users />
+          <EmployeesTable
+            /* employees={handleTotalEmployees()} */
+            employees={employees.filter((employee) =>
+              employee.full_name.toLowerCase().includes(search.toLowerCase())
+            )}
+            actions={actions}
+          />
         </div>
         <div className="flex justify-end w-full">
           <Button
             text="My Payroll"
-            onClick={handelViewMyPayroll}
+            onClick={handleViewMyPayroll}
             className={"payroll-dashboard-view"}
             textColor="text-white"
           />

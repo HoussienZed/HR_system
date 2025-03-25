@@ -9,4 +9,16 @@ class Department extends Model
 {
     /** @use HasFactory<\Database\Factories\DepartmentFactory> */
     use HasFactory;
+
+    protected $fillable = ['name', 'description'];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
+    }
 }

@@ -3,15 +3,16 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AttendanceController;
 
 Route::group(['prefix' => 'v1'], function(){
     //Authorized Users
     Route::group(["middleware" => "auth:api"], function () {
         //Authorized Users (HR)
         Route::group(["prefix" => "HR"], function () {
-            Route::group(["prefix" => ""], function () {
+            // Route::group(["prefix" => ""], function () {});
 
-            });
+            Route::post('/clockIn', [AttendanceController::class, "clockIn"]);
 
         });
 

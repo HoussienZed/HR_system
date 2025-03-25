@@ -1,32 +1,7 @@
 import axiosBaseUrl from "../../../utils/axios";
 import "./style.css";
-import { CircleX, UserRoundPen } from "lucide-react";
 
-const Users = () => {
-  //demo data to fill the table, data should be the response from get all employees api
-  const employees = [
-    {
-      full_name: "ali",
-      email: "example@example.com",
-      gender: "male",
-      position: "manager",
-      department: "tech",
-      salary: "1500",
-      status: "active",
-    },
-  ];
-
-  /*  const allEmployees = async () => {
-    const employees = await axiosBaseUrl.get("/employees");
-    return employees.data;
-  }; */
-
-  //function to call add employee api
-  const handleAdd = () => {};
-
-  //function to handle delete employee api
-  const handleDelete = () => {};
-
+const EmployeesTable = ({ employees, actions }) => {
   return (
     <div>
       <table className="users-table">
@@ -43,22 +18,25 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map((user) => (
-            <tr key={user.email}>
-              <td>{user.full_name}</td>
-              <td>{user.email}</td>
-              <td>{user.gender}</td>
-              <td>{user.position}</td>
-              <td>{user.department}</td>
-              <td>{user.salary}</td>
-              <td>{user.status}</td>
+          {employees.map((employee) => (
+            <tr key={employee.id}>
+              <td>{employee.full_name}</td>
+              <td>{employee.email}</td>
+              <td>{employee.gender}</td>
+              <td>{employee.position}</td>
+              <td>{employee.department}</td>
+              <td>{employee.salary}</td>
+              <td>{employee.status}</td>
               <td>
-                <button className="users-table-btn" onClick={handleAdd}>
-                  <UserRoundPen />
-                </button>
-                <button className="users-table-btn" onClick={handleDelete}>
-                  <CircleX />
-                </button>
+                {actions.map((action, index) => (
+                  <button
+                    key={index}
+                    onClick={() => action.handler(employee)}
+                    className="users-table-btn"
+                  >
+                    {action.label}
+                  </button>
+                ))}
               </td>
             </tr>
           ))}
@@ -68,4 +46,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default EmployeesTable;
