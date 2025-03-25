@@ -49,7 +49,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            // 'password' => 'hashed',
         ];
     }
 
@@ -73,7 +73,8 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    // public function department(){
-    //     return $this->hasMany(Department::class);
-    // }
+    public function department()
+    {
+        return $this->hasMany(Department::class);
+    }
 }
