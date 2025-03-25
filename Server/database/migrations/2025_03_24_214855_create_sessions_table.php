@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payrolls', function (Blueprint $table) {
-            $table->id();
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
             $table->integer('user_id');
-            $table->decimal('net_salary', 10, 2)->default(0);
-            $table->decimal('tax_deducted', 10, 2)->default(0);
-            $table->timestamps();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payrolls');
+        Schema::dropIfExists('sessions');
     }
 };

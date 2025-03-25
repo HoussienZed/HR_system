@@ -19,6 +19,11 @@ return new class extends Migration
             $table->unsignedInteger('reserved_at')->nullable();
             $table->unsignedInteger('available_at');
             $table->unsignedInteger('created_at');
+            
+            $table->integer('department_id');
+            $table->string('title', 255);
+            $table->text('description')->nullable();
+            $table->enum('status', ['open', 'closed'])->default('open');
         });
 
         Schema::create('job_batches', function (Blueprint $table) {

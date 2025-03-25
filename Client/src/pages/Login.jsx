@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 let protocol = "http://";
-let host = "localhost:8080";
-let path = "/gallery-system/server/login";
+let host = "localhost:8000";
+// let host = "localhost:8080";
+// let path = "/gallery-system/server/login";
+let path = "/api/v1/login";
 
 const url = protocol + host + path;
 
@@ -40,9 +42,13 @@ const Login = () => {
         }
       );
       if (response.data.success == true) {
-        localStorage.setItem("id", response.data.user.id);
-        localStorage.setItem("full_name", response.data.user.full_name);
-        localStorage.setItem("token", response.data.user.token);
+        // console.log(response);
+        // localStorage.setItem("id", response.data.user.id);
+        // localStorage.setItem("full_name", response.data.user.full_name);
+        // localStorage.setItem("token", response.data.user.token);
+        localStorage.setItem("id", response.data.data.id);
+        localStorage.setItem("full_name", response.data.data.full_name);
+        localStorage.setItem("token", response.data.data.token);
 
         navigate("/Home");
       } else {

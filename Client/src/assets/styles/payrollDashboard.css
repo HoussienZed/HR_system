@@ -1,0 +1,13 @@
+.cards-container {
+    
+}
+
+.card {
+    width: 270px;
+    height: 140px;
+}
+
+.payroll-dashboard-title {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
