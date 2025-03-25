@@ -8,14 +8,16 @@ const Button = ({
   link_className,
   bgColor = "bg-primary",
   textColor = "text-white",
+  fontSize = "body4",
 }) => {
-  const classNames = className + " " + bgColor + " " + textColor;
+  const classNames =
+    className + " " + bgColor + " " + textColor + " " + fontSize;
   const link_classNames = link_className;
   return (
     <>
       {path ? (
         <button
-          className={`body2 btn flex flex-center ${classNames}`}
+          className={`btn flex flex-center ${classNames}`}
           onClick={onClick}
           type="submit"
         >
@@ -25,7 +27,7 @@ const Button = ({
         </button>
       ) : (
         <button
-          className={`body2 btn flex flex-center ${classNames}`}
+          className={`btn flex flex-center ${classNames}`}
           onClick={onClick}
         >
           <p>{text}</p>
