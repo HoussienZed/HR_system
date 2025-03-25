@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AttendanceController;
+use App\Models\LeaveRequest;
 
 Route::group(['prefix' => 'v1'], function () {
     //Authorized Users
@@ -14,6 +15,9 @@ Route::group(['prefix' => 'v1'], function () {
             // Route::group(["prefix" => ""], function () {});
 
             Route::post('/clockIn', [AttendanceController::class, "clockIn"]);
+
+            Route::get('upcoming-leaves', [LeaveRequestController::class, 'getUpcomingLeaves']);
+            Route::patch('/{id}/status', [LeaveRequestController::class, 'UpdateStatus']);
         });
 
         //Unauthorized Users
