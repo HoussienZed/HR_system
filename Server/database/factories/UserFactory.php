@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'gender' => $this->faker->randomElement(['male', 'female']),
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'),
-            'type' => $this->faker->randomElement(['employee', 'HR']),
+            'user_type' => $this->faker->randomElement(['employee', 'HR']),
             'status' => $this->faker->randomElement(['active', 'terminated']),
             'location' => $this->faker->randomElement(['remote', 'onSite']),
             'bank_account' => $this->faker->bankAccountNumber,
