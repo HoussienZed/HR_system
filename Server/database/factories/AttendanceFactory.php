@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Attendance;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,16 @@ class AttendanceFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = Attendance::class;
+
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::factory(),
+            'date' => $this->faker->date(),
+            'check_in' => $this->faker->time(),
+            'check_out' => $this->faker->optional()->time(),
         ];
     }
 }
