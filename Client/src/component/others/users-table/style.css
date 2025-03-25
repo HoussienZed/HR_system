@@ -4,6 +4,7 @@
     font-size: 16px;
     width: 1140px;
     text-align: center;
+    height: 45px;
 }
 
 th {
@@ -11,7 +12,7 @@ th {
 }
 
 td{
-    background-color: var(--white-color);
+    background-color: white;
 }
 
 .users-table-btn {

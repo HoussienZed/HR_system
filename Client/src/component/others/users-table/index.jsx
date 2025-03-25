@@ -1,9 +1,10 @@
+import axiosBaseUrl from "../../../utils/axios";
 import "./style.css";
 import { CircleX, UserRoundPen } from "lucide-react";
 
 const Users = () => {
   //demo data to fill the table, data should be the response from get all employees api
-  const data = [
+  const employees = [
     {
       full_name: "ali",
       email: "example@example.com",
@@ -14,6 +15,11 @@ const Users = () => {
       status: "active",
     },
   ];
+
+  /*  const allEmployees = async () => {
+    const employees = await axiosBaseUrl.get("/employees");
+    return employees.data;
+  }; */
 
   //function to call add employee api
   const handleAdd = () => {};
@@ -37,7 +43,7 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((user) => (
+          {employees.map((user) => (
             <tr key={user.email}>
               <td>{user.full_name}</td>
               <td>{user.email}</td>
