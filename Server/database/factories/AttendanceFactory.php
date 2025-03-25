@@ -22,9 +22,8 @@ class AttendanceFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::factory(),
-            'date' => $this->faker->date(),
-            'check_in' => $this->faker->time(),
-            'check_out' => $this->faker->optional()->time(),
+            'clock_in' => $this->faker->dateTimeThisMonth(),
+            'clock_out' => $this->faker->dateTimeThisMonth(),
         ];
     }
 }
