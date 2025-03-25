@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('leave_balances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->integer('user_id');
             $table->enum('leave_type', ['annual', 'sick', 'unpaid', 'maternity', 'paternity']);
             $table->decimal('balance', 10, 2);
             $table->timestamps();

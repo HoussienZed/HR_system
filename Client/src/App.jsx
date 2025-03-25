@@ -12,6 +12,41 @@ import Attendance from "./pages/employee/Attendance";
 import Employees from "./pages/hr/Employees";
 
 const App = () => {
+  const hrSidebarItems = [
+    { icon: "LayoutDashboard", label: "Dashboard", to: "../dashboard" },
+    {
+      icon: "HandCoins",
+      label: "Payroll Dashboard",
+      to: "../payrolldashboard",
+    },
+    { icon: "UserRound", label: "Employees", to: "../employees" },
+    { icon: "ScanEye", label: "Reviews", to: "../reviews" },
+    { icon: "SquareCheckBig", label: "Leave Approval", to: "../leaveapproval" },
+    { icon: "NotebookText", label: "Leave Overview", to: "../leaveoverview" },
+    { icon: "BookText", label: "Training Overview", to: "../trainingoverview" },
+    {
+      icon: "Landmark",
+      label: "Retirement Calculator",
+      to: "../retirementcalculator",
+    },
+  ];
+
+  const employeeSidebarItems = [
+    { icon: "SquareCheckBig", label: "Leaves", to: "../employeeleaves" },
+    {
+      icon: "BookText",
+      label: "Training Portal",
+      to: "../trainingportal",
+    },
+    { icon: "HandCoins", label: "Payroll", to: "../employeepayroll" },
+    { icon: "Ambulance", label: "Benefits", to: "../benefitsdashboard" },
+    {
+      icon: "Landmark",
+      label: "Retirement Calculator",
+      to: "../retirementcalculator",
+    },
+  ];
+
   return (
     <>
       <BrowserRouter>
@@ -24,7 +59,7 @@ const App = () => {
             <Route
               element={
                 <>
-                  <SideBar />
+                  <SideBar navItems={employeeSidebarItems} />
                   <Outlet />
                 </>
               }
@@ -47,7 +82,7 @@ const App = () => {
               <Route
                 element={
                   <>
-                    <SideBar />
+                    <SideBar navItems={hrSidebarItems} />
                     <Outlet />
                   </>
                 }

@@ -9,4 +9,11 @@ class Attendance extends Model
 {
     /** @use HasFactory<\Database\Factories\AttendanceFactory> */
     use HasFactory;
+
+    protected $fillable = ['user_id', 'date', 'check_in', 'check_out', 'status'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

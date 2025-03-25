@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('onboarding_tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('onboarding_id')->constrained('onboardings')->onDelete('cascade');
+            $table->integer('onboarding_id');
             $table->string('title', 255);
             $table->enum('status', ['pending', 'completed']);
             $table->timestamps();

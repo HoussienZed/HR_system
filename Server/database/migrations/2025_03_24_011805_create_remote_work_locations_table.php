@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('remote_work_locations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->integer('user_id');
             $table->decimal('latitude', 9, 6);
             $table->decimal('longitude', 9, 6);
             $table->timestamps();
