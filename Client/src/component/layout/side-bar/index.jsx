@@ -9,49 +9,39 @@ import {
   NotebookText,
   BookText,
   Landmark,
+  Ambulance,
 } from "lucide-react";
 import logo from "../../../assets/logo.png";
 
-const SideBar = () => {
+const SideBar = ({ navItems = [] }) => {
+  const iconComponents = {
+    LayoutDashboard: <LayoutDashboard />,
+    SquareCheckBig: <SquareCheckBig />,
+    HandCoins: <HandCoins />,
+    UserRound: <UserRound />,
+    ScanEye: <ScanEye />,
+    NotebookText: <NotebookText />,
+    BookText: <BookText />,
+    Landmark: <Landmark />,
+    Ambulance: <Ambulance />,
+  };
+
   return (
     <nav className="bg-primary">
       <ul className="side-navbar-list">
         <li className="side-navbar-logo">
           {<img src={logo} className="hrflow-logo" alt="HR_Flow" />}
         </li>
-        <li className="side-navbar-element">
-          <LayoutDashboard />
-          <Link to="../dashboard">Dashboard</Link>
-        </li>
-        <li className="side-navbar-element">
-          <HandCoins />
-          <Link to="../payrolldashboard">Payroll Dashboard</Link>
-        </li>
-        <li className="side-navbar-element">
-          <UserRound />
-          <Link to="../employees">Employees</Link>
-          <Link />
-        </li>
-        <li className="side-navbar-element">
-          <ScanEye />
-          <Link to="../reviews">Reviews</Link>
-        </li>
-        <li className="side-navbar-element">
-          <SquareCheckBig />
-          Leave Approval
-        </li>
-        <li className="side-navbar-element">
-          <NotebookText />
-          <Link to="../leaveoverview">Leave Overview</Link>
-        </li>
-        <li className="side-navbar-element">
-          <BookText />
-          <Link to="../trainingoverview">Training Overview</Link>
-        </li>
-        <li className="side-navbar-element">
-          <Landmark />
-          <Link to="../retirementcalculator">Retirement Claculator</Link>
-        </li>
+        {navItems.map((item, index) => (
+          <li key={index} className="side-navbar-element">
+            {iconComponents[item.icon]}
+            {item.to ? (
+              <Link to={item.to}>{item.label}</Link>
+            ) : (
+              <span>{item.label}</span>
+            )}
+          </li>
+        ))}
       </ul>
     </nav>
   );

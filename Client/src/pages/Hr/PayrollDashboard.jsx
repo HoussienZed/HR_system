@@ -8,14 +8,79 @@ import {
 } from "lucide-react";
 import "../../assets/styles/payrollDashboard.css";
 import Input from "../../component/others/Input";
-import { useState } from "react";
-import Users from "../../component/others/users-table";
+import { useState, useEffect } from "react";
+import EmployeesTable from "../../component/others/users-table";
 import Button from "../../component/others/Button";
 import axios from "axios";
 import axiosBaseUrl from "../../utils/axios";
+import { UserRoundPen } from "lucide-react";
 
 const PayrollDashboard = () => {
   const [search, setSearch] = useState("");
+  /* const [employees, setEmployees] = useState([]); */
+
+  const columns = [
+    { key: "full_name", header: "Employee Name" },
+    { key: "email", header: "Email" },
+    { key: "gender", header: "Gender" },
+    { key: "position", header: "Position" },
+    { key: "department", header: "Department" },
+    { key: "salary", header: "Salary" },
+    { key: "status", header: "Status" },
+  ];
+
+  const employees = [
+    {
+      id: 1,
+      full_name: "ali",
+      email: "example@example.com",
+      gender: "male",
+      position: "manager",
+      department: "tech",
+      salary: "1500",
+      status: "active",
+    },
+    {
+      id: 2,
+      full_name: "aop",
+      email: "example@example.com",
+      gender: "male",
+      position: "manager",
+      department: "tech",
+      salary: "1500",
+      status: "active",
+    },
+    {
+      id: 3,
+      full_name: "aloli",
+      email: "example@example.com",
+      gender: "male",
+      position: "manager",
+      department: "tech",
+      salary: "1500",
+      status: "active",
+    },
+  ];
+
+  const actions = [
+    {
+      label: <UserRoundPen />,
+      handler: (employee) => alert("editing employee"),
+    },
+  ];
+
+  /*  useEffect(() => {
+    const fetchEmployees = async () => {
+      const response = await axiosBaseUrl.get("/employees");
+      setEmplyees(response.data);
+      setLoading(false);
+    };
+    fetchEmployees();
+  }, []); */
+
+  const filteredEmployees = employees.filter((employee) =>
+    employee.full_name.toLowerCase().includes(search.toLowerCase())
+  );
 
   /* const handleTotalSalaries = async () => {
     const response = await axiosBaseUrl.get("/employees");
@@ -63,7 +128,7 @@ const PayrollDashboard = () => {
     return totalTaxes;
   };
  */
-  const handelViewMyPayroll = () => {};
+  const handleViewMyPayroll = () => {};
   return (
     <>
       <div className="flex-column">
@@ -118,12 +183,16 @@ const PayrollDashboard = () => {
           />
         </div>
         <div className="payroll-dashboard-users">
-          <Users />
+          <EmployeesTable
+            data={filteredEmployees}
+            columns={columns}
+            actions={actions}
+          />
         </div>
         <div className="flex justify-end w-full">
           <Button
             text="My Payroll"
-            onClick={handelViewMyPayroll}
+            onClick={handleViewMyPayroll}
             className={"payroll-dashboard-view"}
             textColor="text-white"
           />
