@@ -39,4 +39,14 @@ class LeaveRequestController extends Controller
 
         return messageResponse(true, 'Leave request updated successfully', 201, $leaveRequest);
     }
+
+    public function getUpcomingLeaves()
+    {
+        $upcomingLeaves = LeaveRequest::with('user')
+            ->where('start_date', '>=', now()->toDateString())
+            ->orderBy('start_date', 'asc')
+            ->get();
+
+        return messageResponse(true, 'Fetched upcoming leaves successfully', 201, $upcomingLeaves);
+    }
 }
