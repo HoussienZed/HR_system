@@ -27,4 +27,16 @@ class LeaveRequestController extends Controller
         $leaveRequests = LeaveRequest::with('user')->get();
         return messageResponse(true, 'successfully got leave requests', 201, $leaveRequests);
     }
+
+    public function UpdateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,approved,rejected',
+        ]);
+
+        $leaveRequest = LeaveRequest::findOrFail($id);
+        $leaveRequest->update(['status' => $request->status]);
+
+        return messageResponse(true, 'Leave request updated successfully', 201, $leaveRequest);
+    }
 }
