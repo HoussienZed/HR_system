@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\OnboardingTask;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,15 @@ class OnboardingTaskFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = OnboardingTask::class;
+
     public function definition(): array
     {
         return [
-            //
+            'onboarding_id' => \App\Models\Onboarding::factory(),
+            'title' => $this->faker->sentence,
+            'status' => $this->faker->randomElement(['pending', 'completed']),
         ];
     }
 }

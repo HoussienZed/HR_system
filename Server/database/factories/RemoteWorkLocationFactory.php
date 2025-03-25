@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\RemoteWorkLocation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,15 @@ class RemoteWorkLocationFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = RemoteWorkLocation::class;
+
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::factory(),
+            'latitude' => $this->faker->latitude(),
+            'longitude' => $this->faker->longitude(),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Document;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,16 @@ class DocumentFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = Document::class;
+
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::factory(),
+            'document_name' => $this->faker->word . '.pdf',
+            'document_path' => $this->faker->filePath(),
+            'type' => $this->faker->randomElement(['contract', 'certificate', 'id']),
         ];
     }
 }
