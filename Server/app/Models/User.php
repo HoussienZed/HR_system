@@ -19,15 +19,18 @@ class User extends Authenticatable implements JWTSubject
      * @var list<string>
      */
     protected $fillable = [
+        'department_id',
+        'position_id',
+        'medical_plan_id',
         'full_name',
+        'gender',
         'email',
         'password',
-        // 'gender',
-        // 'user_type',
-        // 'status',
-        // 'location',
-        // 'bank_account',
-        // 'nssf_contribution',
+        'type',
+        'status',
+        'location',
+        'bank_account',
+        'nssf_contribution',
     ];
 
     /**
@@ -49,7 +52,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return [
             'email_verified_at' => 'datetime',
-            // 'password' => 'hashed',
+            'nssf_contribution' => 'boolean',
+            'password' => 'hashed',
         ];
     }
 
@@ -85,7 +89,60 @@ class User extends Authenticatable implements JWTSubject
 
     public function medical_plan()
     {
-        return $this->belongsTo(Position::class);
+        return $this->belongsTo(MedicalPlan::class);
+    }
+
+    //there is a many to many relation between users and courses through the junction table user_courses
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'user_courses')->withTimestamps();
+    }
+
+    public function payrolls()
+    {
+        return $this->hasMany(Payroll::class);
+    }
+
+    public function benefits()
+    {
+        return $this->hasMany(Benefit::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
+
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class);
+    }
+
+    public function leaveBalances()
+    {
+        return $this->hasMany(LeaveBalance::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+    public function remoteWorkLocations()
+    {
+        return $this->hasMany(RemoteWorkLocation::class);
+    }
+    public function givenReviews()
+    {
+        return $this->hasMany(Review::class);
     }
 
     public function ai_queries()
