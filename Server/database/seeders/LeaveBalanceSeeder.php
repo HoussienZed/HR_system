@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\LeaveBalance;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class LeaveBalanceSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        LeaveBalance::factory(10)->create();
     }
 }
