@@ -3,82 +3,99 @@ import Section from "../../component/layout/Section";
 import attendanceSvg from "../../assets/attendance-svg.svg";
 import Button from "../../component/others/Button";
 import UsersTable from "../../component/others/users-table/index";
-import Input from "../../component/others/Input";
 import { useState } from "react";
+import axios from "axios";
 
 let protocol = "http://";
 let host = "localhost:8080";
-let path = "/hr-system/server/login";
+let path = "/hr-system/server/clockIn";
 
 const url = protocol + host + path;
 
 const Attendance = () => {
-  const [location, setLocation] = useState("");
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const [clockedIn, setClockedIn] = useState(false);
 
-  const handleInsertion = async (e) => {
-    // e.preventDefault();
-    // const form = new FormData();
-    // form.append("location", location);
-    // try {
-    //   const response = await axios.post(
-    //     url,
-    //     {
-    //       location,
-    //     },
-    //     {
-    //       headers: {
-    //         Accept: "application/json",
-    //       },
-    //     }
-    //   );
-    //   if (response.data.success == true) {
-    //     localStorage.setItem("id", response.data.user.id);
-    //     localStorage.setItem("full_name", response.data.user.full_name);
-    //     localStorage.setItem("token", response.data.user.token);
-    //     navigate("/Home");
-    //   } else {
-    //     console.log("Login failed:", response.data.message);
-    //   }
-    // } catch (error) {
-    //   console.error("Error during login:", error);
-    // }
+  const handleClockIn = async () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        setLatitude(lat);
+        setLongitude(lon);
+
+        try {
+          const response = await axios.post(
+            url,
+            {
+              latitude: lat,
+              longitude: lon,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Accept: "application/json",
+              },
+            }
+          );
+
+          if (response.data.success) {
+            setClockedIn(true);
+            alert("Success: " + response.data.message);
+          } else {
+            alert("Error " + response.data.message);
+          }
+        } catch (error) {
+          console.error("Clock-in error:", error);
+          alert("Something went wrong while clocking in.");
+        }
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        alert("Could not get your location.");
+      }
+    );
   };
 
   return (
     <>
       <Section>
         <SectionTitle>Attendance</SectionTitle>
-        <form className="bg-primary body2">
-          <Input
-            type={"text"}
-            name={"location"}
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder={"location"}
-            className={"body2"}
-            label={"Enter Location"}
-          />
-          <Button
-            text={"Insert Location"}
-            onClick={handleInsertion}
-            className={"w-full"}
-            bgColor="bg-secondary"
-            textColor="text-white"
-          />
-        </form>
         <div className="flex justify-between items-center mt-8">
           <div className="flex flex-column items-end justify-between gap-8 bg-white rounded-lg px-12 py-12">
             <div className="flex gap-16 w-full justify-between items-center">
               <h3>Clock In:</h3>
-              <Button text={"Clock In"} fontSize="body2" />
+              <Button
+                text={"Clock In"}
+                fontSize="body2"
+                onClick={handleClockIn}
+              />
             </div>
             <div className="flex gap-16 w-full justify-between items-center">
               <h3>Clock out:</h3>
               <Button text={"Clock Out"} fontSize="body2" />
             </div>
-            <p>Still not clocked in</p>
+            <div>
+              <p className="text-sm text-gray-700">
+                {clockedIn
+                  ? "✅ You have successfully clocked in today."
+                  : "🕒 You have not clocked in yet."}
+              </p>
+
+              {latitude && longitude && (
+                <p className="text-sm text-gray-500 mt-2">
+                  📍 Your location: {latitude.toFixed(5)},{" "}
+                  {longitude.toFixed(5)}
+                </p>
+              )}
+            </div>
           </div>
           <div>
             <img src={attendanceSvg} alt="Attendance Illustration" />
