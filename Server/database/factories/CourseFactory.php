@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,17 @@ class CourseFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = Course::class;
+
+
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
+            'pdf_url' => $this->faker->url,
+            'course_category' => $this->faker->word,
         ];
     }
 }

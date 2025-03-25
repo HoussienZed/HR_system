@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Interview;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,16 @@ class InterviewFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = Interview::class;
+
     public function definition(): array
     {
         return [
-            //
+            'candidate_id' => \App\Models\Candidate::factory(),
+            'scheduled_date' => $this->faker->dateTime(),
+            'feedback' => $this->faker->paragraph,
+            'status' => $this->faker->randomElement(['completed', 'canceled']),
         ];
     }
 }

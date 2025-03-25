@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\AIQuery;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,15 @@ class AIQueryFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = AIQuery::class;
+
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::factory(),
+            'question' => $this->faker->sentence,
+            'answer' => $this->faker->paragraph,
         ];
     }
 }
