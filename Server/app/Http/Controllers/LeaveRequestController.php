@@ -49,4 +49,10 @@ class LeaveRequestController extends Controller
 
         return messageResponse(true, 'Fetched upcoming leaves successfully', 201, $upcomingLeaves);
     }
+
+    public function getUserLeaveRequests($userId)
+    {
+        $leaveRequests = LeaveRequest::where('user_id', $userId)->get();
+        return messageResponse(true, 'Fetched leave requests successfully', 201, $leaveRequests);
+    }
 }
