@@ -87,4 +87,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(Position::class);
     }
+
+    public function ai_queries()
+    {
+        return $this->hasMany(AIQuery::class);
+    }
 }
