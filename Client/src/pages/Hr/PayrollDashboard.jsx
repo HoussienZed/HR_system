@@ -29,6 +29,26 @@ const PayrollDashboard = () => {
       salary: "1500",
       status: "active",
     },
+    {
+      id: 1,
+      full_name: "aop",
+      email: "example@example.com",
+      gender: "male",
+      position: "manager",
+      department: "tech",
+      salary: "1500",
+      status: "active",
+    },
+    {
+      id: 3,
+      full_name: "aloli",
+      email: "example@example.com",
+      gender: "male",
+      position: "manager",
+      department: "tech",
+      salary: "1500",
+      status: "active",
+    },
   ];
 
   const actions = [
@@ -141,7 +161,9 @@ const PayrollDashboard = () => {
         <div className="payroll-dashboard-users">
           <EmployeesTable
             /* employees={handleTotalEmployees()} */
-            employees={employees}
+            employees={employees.filter((employee) =>
+              employee.full_name.toLowerCase().includes(search.toLowerCase())
+            )}
             actions={actions}
           />
         </div>

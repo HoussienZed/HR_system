@@ -1,5 +1,5 @@
 .users-table, th, td {
-    border: 2px solid var(--white-color);
+    border: 2px solid #E5F3FF;
     border-collapse: collapse;
     font-size: 16px;
     width: 1140px;
