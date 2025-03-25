@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import "../../assets/styles/payrollDashboard.css";
 import Input from "../../component/others/Input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EmployeesTable from "../../component/others/users-table";
 import Button from "../../component/others/Button";
 import axios from "axios";
@@ -17,6 +17,17 @@ import { UserRoundPen } from "lucide-react";
 
 const PayrollDashboard = () => {
   const [search, setSearch] = useState("");
+  /* const [employees, setEmployees] = useState([]); */
+
+  const columns = [
+    { key: "full_name", header: "Employee Name" },
+    { key: "email", header: "Email" },
+    { key: "gender", header: "Gender" },
+    { key: "position", header: "Position" },
+    { key: "department", header: "Department" },
+    { key: "salary", header: "Salary" },
+    { key: "status", header: "Status" },
+  ];
 
   const employees = [
     {
@@ -30,7 +41,7 @@ const PayrollDashboard = () => {
       status: "active",
     },
     {
-      id: 1,
+      id: 2,
       full_name: "aop",
       email: "example@example.com",
       gender: "male",
@@ -57,6 +68,19 @@ const PayrollDashboard = () => {
       handler: (employee) => alert("editing employee"),
     },
   ];
+
+  /*  useEffect(() => {
+    const fetchEmployees = async () => {
+      const response = await axiosBaseUrl.get("/employees");
+      setEmplyees(response.data);
+      setLoading(false);
+    };
+    fetchEmployees();
+  }, []); */
+
+  const filteredEmployees = employees.filter((employee) =>
+    employee.full_name.toLowerCase().includes(search.toLowerCase())
+  );
 
   /* const handleTotalSalaries = async () => {
     const response = await axiosBaseUrl.get("/employees");
@@ -160,10 +184,8 @@ const PayrollDashboard = () => {
         </div>
         <div className="payroll-dashboard-users">
           <EmployeesTable
-            /* employees={handleTotalEmployees()} */
-            employees={employees.filter((employee) =>
-              employee.full_name.toLowerCase().includes(search.toLowerCase())
-            )}
+            data={filteredEmployees}
+            columns={columns}
             actions={actions}
           />
         </div>
