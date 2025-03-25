@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\LeaveBalance;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,14 @@ class LeaveBalanceFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = LeaveBalance::class;
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::factory(),
+            'leave_type' => $this->faker->randomElement(['annual', 'sick', 'unpaid', 'maternity', 'paternity']),
+            'balance' => $this->faker->randomFloat(2, 0, 100),
         ];
     }
 }
