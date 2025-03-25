@@ -19,6 +19,12 @@ class LeaveRequestController extends Controller
 
         $leaveRequest = LeaveRequest::create($request->all());
 
-        return messageResponse(true, 'Leave request submitted successfully', $leaveRequest, 201);
+        return messageResponse(true, 'Leave request submitted successfully', 201, $leaveRequest);
+    }
+
+    public function index()
+    {
+        $leaveRequests = LeaveRequest::with('user')->get();
+        return messageResponse(true, 'successfully got leave requests', 201, $leaveRequests);
     }
 }
