@@ -10,6 +10,7 @@ import EditBenefits from "./pages/employee/EditBenefits";
 import RetirementCalculator from "./pages/employee/RetirementCalculator";
 import Attendance from "./pages/employee/Attendance";
 import { getUserType } from "./utils/getUserType";
+import Employees from "./pages/hr/Employees";
 
 const App = () => {
   const type = getUserType();
@@ -97,6 +98,7 @@ const App = () => {
                   path="/payrolldashboard"
                   element={<PayrollDashboard />}
                 ></Route>
+                <Route path="/employees" element={<Employees />}></Route>
               </Route>
             </Route>
           </Route>

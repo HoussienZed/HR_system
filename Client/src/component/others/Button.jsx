@@ -8,7 +8,7 @@ const Button = ({
   link_className,
   bgColor = "bg-primary",
   textColor = "text-white",
-  fontSize = "body4",
+  fontSize = "body3",
 }) => {
   const classNames =
     className + " " + bgColor + " " + textColor + " " + fontSize;
