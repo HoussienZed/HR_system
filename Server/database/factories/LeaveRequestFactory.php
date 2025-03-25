@@ -22,10 +22,11 @@ class LeaveRequestFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::factory(),
-            'reason' => $this->faker->sentence,
+            'leave_type' => $this->faker->randomElement(['annual', 'sick', 'unpaid', 'maternity', 'paternity']),
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
             'status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
+            'reason' => $this->faker->paragraph,
         ];
     }
 }
