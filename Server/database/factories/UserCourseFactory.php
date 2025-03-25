@@ -26,7 +26,7 @@ class UserCourseFactory extends Factory
             'started_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'completed_at' => null,
             'certificate_issued_at' => null,
-            'status' => 'started',
+            'status' => $this->faker->randomElement(['started', 'completed', 'certificate_issued']),
         ];
     }
 }
