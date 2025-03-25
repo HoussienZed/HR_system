@@ -6,21 +6,21 @@ const EmployeePayroll = () => {
     <div className="flex flex-column flex-center payroll-details-container">
       <div className="bg-white flex-column justify-between payroll-details">
         <h1>Employee Payroll</h1>
-        <p>Full Name:</p>
+        <p className="employee-payroll-title">Full Name:</p>
         <hr />
-        <p>Title: </p>
+        <p className="employee-payroll-title">Title: </p>
         <hr />
-        <p>Bank Account:</p>
+        <p className="employee-payroll-title">Bank Account:</p>
         <hr />
-        <p>Basic Salary:</p>
+        <p className="employee-payroll-title">Basic Salary:</p>
         <hr />
-        <p>Transportation:</p>
+        <p className="employee-payroll-title">Transportation:</p>
         <hr />
-        <p>Contribution to NSSF:</p>
+        <p className="employee-payroll-title">Contribution to NSSF:</p>
         <hr />
-        <p>Medical Care Plan: </p>
+        <p className="employee-payroll-title">Medical Care Plan: </p>
         <hr />
-        <p>Income Taxes (11%):</p>
+        <p className="employee-payroll-title">Income Taxes (11%):</p>
         <hr />
       </div>
     </div>
