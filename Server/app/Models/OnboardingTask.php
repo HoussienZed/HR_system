@@ -9,4 +9,15 @@ class OnboardingTask extends Model
 {
     /** @use HasFactory<\Database\Factories\OnboardingTaskFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'onboarding_id',
+        'title',
+        'status',
+    ];
+
+    public function onboarding()
+    {
+        return $this->belongsTo(Onboarding::class);
+    }
 }
