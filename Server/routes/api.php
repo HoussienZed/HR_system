@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\RemoteWorkLocationController;
 use App\Models\LeaveRequest;
+use App\Http\Controllers\EmployeeController;
 
 Route::group(['prefix' => 'v1'], function () {
     //Authorized Users
@@ -26,6 +27,15 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('/all-balances', [LeaveBalanceController::class, 'getAllUsersLeaveBalances']);
             Route::get('/overall-balance', [LeaveBalanceController::class, 'getOverallTotalBalance']);
             Route::get('/total-type-balance', [LeaveBalanceController::class, 'getTotalBalanceByType']);
+        Route::group(["prefix" => "HR"], function () {
+            // Route::group(["prefix" => ""], function () {});
+            Route::get('/employees', [EmployeeController::class, 'index']);
+        })
+
+
+        Route::group(["prefix" => "HR", "middleware" => "isHR"], function () {
+            //Route::get('/dashboard', [DashboardController::class, "dashboard"]);
+
         });
 
         //Authorized Users
