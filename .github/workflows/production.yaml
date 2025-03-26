@@ -1,4 +1,4 @@
-name: Deploy React and Laravel to EC2
+name: Pushing to production
 
 on:
   push:
