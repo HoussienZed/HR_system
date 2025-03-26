@@ -10,7 +10,7 @@ import EditBenefits from "./pages/employee/EditBenefits";
 import RetirementCalculator from "./pages/employee/RetirementCalculator";
 import Attendance from "./pages/employee/Attendance";
 import { getUserType } from "./utils/getUserType";
-import Employees from "./pages/hr/Employees";
+import Employees from "./pages/Hr/Employees";
 
 const App = () => {
   const type = getUserType();
