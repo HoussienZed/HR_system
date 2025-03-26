@@ -38,7 +38,13 @@ const Login = () => {
         localStorage.setItem("full_name", response.data.data.full_name);
         localStorage.setItem("token", response.data.data.token);
 
-        navigate("/Home");
+        if(response.data.data.user_type === "HR"){
+          navigate("Hr/Employees");
+        } else {
+          navigate("/employee/Attendance");
+          // navigate("/Home");
+        }
+
       } else {
         console.log("Login failed:", response.data.message);
       }
