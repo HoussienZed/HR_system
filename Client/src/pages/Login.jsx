@@ -1,19 +1,17 @@
 import "../App.css";
-import "../assets/styles/login.css";
+// import axios from "axios";
 import { useState } from "react";
+import "../assets/styles/login.css";
+import axiosBaseUrl from "../utils/axios";
 import Input from "../component/others/Input";
-import { Link } from "react-router-dom";
-import Button from "../component/others/Button";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import Button from "../component/others/Button";
 
 let protocol = "http://";
 let host = "localhost:8000";
-// let host = "localhost:8080";
-// let path = "/gallery-system/server/login";
-let path = "/api/v1/login";
+let path = "/login";
 
-const url = protocol + host + path;
+// const url = protocol + host + path;
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -29,23 +27,18 @@ const Login = () => {
     form.append("password", password);
 
     try {
-      const response = await axios.post(
-        url,
+      const response = await axiosBaseUrl.post(path,
         {
           email,
-          password: password,
+          password,
         },
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
+        // {
+        //   headers: {
+        //     Accept: "application/json",
+        //   },
+        // }
       );
       if (response.data.success == true) {
-        // console.log(response);
-        // localStorage.setItem("id", response.data.user.id);
-        // localStorage.setItem("full_name", response.data.user.full_name);
-        // localStorage.setItem("token", response.data.user.token);
         localStorage.setItem("id", response.data.data.id);
         localStorage.setItem("full_name", response.data.data.full_name);
         localStorage.setItem("token", response.data.data.token);
