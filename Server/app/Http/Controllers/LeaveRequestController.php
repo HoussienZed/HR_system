@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LeaveRequestsApproved;
 use App\Models\LeaveBalance;
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
@@ -57,8 +58,13 @@ class LeaveRequestController extends Controller
             'status' => 'required|in:pending,approved,rejected',
         ]);
 
-        $leaveRequest = LeaveRequest::findOrFail($id);
+        $leaveRequest = LeaveRequest::where('id', $id)->firstOrFail();
         $leaveRequest->update(['status' => $request->status]);
+
+        //if approved fire event to deduct from leave balance
+        if ($request->status === 'approved') {
+            event(new LeaveRequestsApproved($leaveRequest));
+        }
 
         return messageResponse(true, 'Leave request updated successfully', 201, $leaveRequest);
     }
