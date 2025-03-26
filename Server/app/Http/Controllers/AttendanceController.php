@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\RemoteWorkLocation;
@@ -17,17 +19,18 @@ class AttendanceController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Latitude and longitude are required.'
-            ], 422);
+            ]);
         }
         // Prevent multiple clock-ins on the same day
         $alreadyClockedIn = Attendance::where('user_id', $user->id)
-            ->whereDate('clock_in', now()->toDateString())
+            ->whereNotNull('clock_in')
+            ->whereNull('clock_out')
             ->first();
         if ($alreadyClockedIn) {
             return response()->json([
                 'success' => false,
                 'message' => 'You have already clocked in today.'
-            ], 409);
+            ]);
         }
         // Get employee's approved work location
         $location = RemoteWorkLocation::where('user_id', $user->id)->first();
@@ -35,7 +38,7 @@ class AttendanceController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'No approved work location found.'
-            ], 403);
+            ]);
         }
         // Calculate the distance between current and approved location
         $distance = $this->haversineDistance(
@@ -51,10 +54,10 @@ class AttendanceController extends Controller
                 'success' => false,
                 'message' => 'You are outside the allowed clock-in range.',
                 'distance' => round($distance, 2) . ' meters'
-            ], 403);
+            ]);
         }
 
-        $location = new RemoteWorkLocation();
+        // $location = new RemoteWorkLocation();
 
         // Save attendance record
         $attendance = new Attendance();
@@ -71,9 +74,39 @@ class AttendanceController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Clocked in successfully.',
-            'distance' => round($distance, 2)
+            'distance' => round($distance, 2),
+            'clockIn' => true
         ]);
     }
+
+    public function clockOut(Request $request)
+    {
+        $user = Auth::user();
+
+        $attendance = Attendance::where('user_id', $user->id)
+            ->whereNotNull('clock_in')
+            ->whereNull('clock_out')
+            ->first();
+
+        if (!$attendance) {
+            return response()->json([
+                'success' => false,
+                'message' => "No active clock-in found"
+            ]);
+        }
+
+        $attendance->clock_out = now();
+        $attendance->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => "You successfully clocked out"
+        ]);
+    }
+
+
+
+
     /**
      * Calculate the distance between two GPS coordinates using Haversine formula
      */
@@ -87,8 +120,8 @@ class AttendanceController extends Controller
         $dLat = $lat2 - $lat1;
         $dLon = $lon2 - $lon1;
         $a = sin($dLat / 2) * sin($dLat / 2) +
-             cos($lat1) * cos($lat2) *
-             sin($dLon / 2) * sin($dLon / 2);
+            cos($lat1) * cos($lat2) *
+            sin($dLon / 2) * sin($dLon / 2);
         $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
         return $earthRadius * $c; // Distance in meters
     }
