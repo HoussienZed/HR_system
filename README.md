@@ -2,31 +2,23 @@
 
 HR Flow System is a structured process that manages employee-related tasks throughout their lifecycle in an organization. It streamlines HR operations, ensuring efficiency, compliance, and a positive employee experience.
 
-## API Reference
+![HR Flow Logo](https://github.com/HoussienZed/HR_system/blob/main/Client/src/assets/logo.png?raw=true)
 
-#### Get all items
+## Features
 
-```http
-  GET /api/items
+- Employee Management
+- Attendance Tracking
+- Leave Management
+- Payroll Integration
+  And many more that you can discover while scrolling through the system!
+
+## Installation
+
+Install HR-Flow with Github
+
+```sh
+  Git clone https://github.com/HoussienZed/HR_system.git
 ```
-
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-
-#### Get item
-
-```http
-  GET /api/items/${id}
-```
-
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
-
-#### add(num1, num2)
-
-Takes two numbers and returns the sum.
 
 ## Demo
 
@@ -48,12 +40,28 @@ As an Employee:
 
     password: password
 
-## Features
+## API Reference
 
-- Employee Management
-- Attendance Tracking
-- Leave Management
-- Payroll Integration
-  And many more that you can discover while scrolling through the system!
+#### Get all items
 
-![HR Flow Logo](https://github.com/HoussienZed/HR_system/blob/main/Client/src/assets/logo.png?raw=true)
+```
+  GET /api/items
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` | **Required**. Your API key |
+
+#### Get item
+
+```
+  GET /api/items/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of item to fetch |
+
+#### add(num1, num2)
+
+Takes two numbers and returns the sum.
