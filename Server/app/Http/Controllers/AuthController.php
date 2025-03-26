@@ -30,11 +30,11 @@ class AuthController extends Controller{
 
     function signup(Request $request){
         try{
-            // $request->validate([
-            //     'full-name' => 'required|string|max:30',
-            //     'email' => 'required|string|email|max:255|unique:users',
-            //     'password' => 'required|string|min:8',
-            // ]);
+            $request->validate([
+                'full-name' => 'required|string|max:30',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8',
+            ]);
     
             $user = new User; 
             // $user->name = $request["full-name"];
