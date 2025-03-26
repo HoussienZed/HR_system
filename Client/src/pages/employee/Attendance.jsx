@@ -54,8 +54,7 @@ const Attendance = () => {
               visible: true,
             });
           }
-        } catch (error) {
-          console.error("Clock-in error:", error);
+        } catch {
           setToast({
             message: "Something went wrong while clocking in.",
             success: false,
@@ -74,6 +73,23 @@ const Attendance = () => {
     );
   };
 
+  const handleClockOut = async () => {
+    try {
+      const response = await axiosBaseUrl.post("/Employees/clockOut");
+      if (response.data.success) {
+        setClockedIn(false);
+        localStorage.setItem("clockIn", false);
+        setToast({
+          message: "You clocked out successfully",
+          success: true,
+          visible: true,
+        });
+      }
+    } catch {
+      setToast("something went wrong", false, true);
+    }
+  };
+
   return (
     <>
       <Section>
@@ -85,9 +101,9 @@ const Attendance = () => {
               <Button
                 text={"Clock In"}
                 fontSize="body2"
-                onClick={handleClockIn}
                 disabled={clockedIn}
                 className={clockedIn ? "disabled" : ""}
+                onClick={handleClockIn}
               />
             </div>
             <div className="flex gap-16 w-full justify-between items-center">
@@ -97,12 +113,13 @@ const Attendance = () => {
                 fontSize="body2"
                 disabled={!clockedIn}
                 className={!clockedIn ? "disabled" : ""}
+                onClick={handleClockOut}
               />
             </div>
             <div>
               <p className="text-sm text-gray-700">
                 {clockedIn
-                  ? "✅ You have successfully clocked in today."
+                  ? "✅ You have successfully clocked in."
                   : "🕒 You have not clocked in yet."}
               </p>
 
