@@ -23,7 +23,8 @@ class AttendanceController extends Controller
         }
         // Prevent multiple clock-ins on the same day
         $alreadyClockedIn = Attendance::where('user_id', $user->id)
-            ->whereDate('clock_in', now()->toDateString())
+            ->whereNotNull('clock_in')
+            ->whereNull('clock_out')
             ->first();
         if ($alreadyClockedIn) {
             return response()->json([
@@ -77,6 +78,35 @@ class AttendanceController extends Controller
             'clockIn' => true
         ]);
     }
+
+    public function clockOut(Request $request)
+    {
+        $user = Auth::user();
+
+        $attendance = Attendance::where('user_id', $user->id)
+            ->whereNotNull('clock_in')
+            ->whereNull('clock_out')
+            ->first();
+
+        if (!$attendance) {
+            return response()->json([
+                'success' => false,
+                'message' => "No active clock-in found"
+            ]);
+        }
+
+        $attendance->clock_out = now();
+        $attendance->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => "You successfully clocked out"
+        ]);
+    }
+
+
+
+
     /**
      * Calculate the distance between two GPS coordinates using Haversine formula
      */
