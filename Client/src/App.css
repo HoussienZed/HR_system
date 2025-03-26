@@ -22,6 +22,11 @@
     cursor: pointer;
 }
 
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 input[type="button"]{
     cursor: pointer;
 }
@@ -77,4 +82,14 @@ a{
   padding: 16px;
   position: relative;
   margin: 5rem;
+}
+
+
+.toast-notification{
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  width: fit-content;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
 }
