@@ -21,7 +21,11 @@ const Attendance = () => {
 
   const handleClockIn = async () => {
     if (!navigator.geolocation) {
-      alert("Geolocation is not supported by your browser.");
+      setToast({
+        message: "Geolocation is not supported by your browser",
+        success: false,
+        visible: true,
+      });
       return;
     }
 
@@ -49,7 +53,7 @@ const Attendance = () => {
             });
           } else {
             setToast({
-              message: response.data.message + " " + clockedIn,
+              message: response.data.message,
               success: false,
               visible: true,
             });
@@ -90,10 +94,75 @@ const Attendance = () => {
     }
   };
 
+  const handleAddingRemoteLocation = async () => {
+    if (!navigator.geolocation) {
+      setToast({
+        message: "Geolocation is not supported by your browser",
+        success: false,
+        visible: true,
+      });
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        try {
+          const response = await axiosBaseUrl.post(
+            "/Employees/addRemoteLocation",
+            {
+              latitude: lat,
+              longitude: lon,
+            }
+          );
+
+          if (response.data.success) {
+            setToast({
+              message: "Remote location added successfully",
+              success: true,
+              visible: true,
+            });
+          } else {
+            setToast({
+              message: response.data.message,
+              success: false,
+              visible: true,
+            });
+          }
+        } catch {
+          setToast({
+            message: "something went wrong while adding remote locaiton",
+            success: false,
+            visible: true,
+          });
+        }
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        setToast({
+          message: "Could not get your location.",
+          success: false,
+          visible: true,
+        });
+      }
+    );
+  };
+
   return (
     <>
       <Section>
         <SectionTitle>Attendance</SectionTitle>
+        <div className="flex flex-column justify-between gap-8 bg-white rounded-lg px-12 py-12 mt-8">
+          <h3 className="h4 font-bold">
+            Is your job is remote and don't have a specfic remote location yet ?
+          </h3>
+          <div className="flex gap-4">
+            <p>add a specific remote location:</p>
+            <Button text={"submit"} onClick={handleAddingRemoteLocation} />
+          </div>
+        </div>
         <div className="flex justify-between items-center mt-8">
           <div className="flex flex-column items-end justify-between gap-8 bg-white rounded-lg px-12 py-12">
             <div className="flex gap-16 w-full justify-between items-center">
