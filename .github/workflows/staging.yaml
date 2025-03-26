@@ -81,7 +81,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             cd /var/www/html/HR_system/
-            git pull origin main
+            git pull origin staging
             cd Server/
             cp .env.example .env
             php artisan key:generate
@@ -93,3 +93,4 @@ jobs:
             php artisan route:cache
             php artisan view:cache
             php artisan migrate --force
+            sudo systemctl restart apache2
