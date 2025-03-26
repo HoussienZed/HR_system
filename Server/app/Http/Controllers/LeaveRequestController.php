@@ -93,4 +93,13 @@ class LeaveRequestController extends Controller
 
         return messageResponse(true, 'Fetched pending leave requests successfully', 201, $pendingRequests);
     }
+
+    public function getTopUsersWithLeaveInfo()
+    {
+        $users = \App\Models\User::with(['leaveBalances', 'leaveRequests' => function ($query) {
+            $query->orderBy('start_date', 'desc')->limit(1);
+        }])->limit(4)->get();
+
+        return messageResponse(true, 'Fetched top users with leave info successfully', 200, $users);
+    }
 }
