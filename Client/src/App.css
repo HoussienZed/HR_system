@@ -1,25 +1,25 @@
-.btn{
+.btn {
   border-radius: 8px;
   cursor: pointer;
 }
-.btn-danger{
+.btn-danger {
   background-color: red;
 }
 .btn > p {
-    padding: 9px 10px;
-    display: flex;
-    gap: 0.2em;
+  padding: 9px 10px;
+  display: flex;
+  gap: 0.2em;
 }
 .btn > a {
-    padding: 9px 10px;
-    display: flex;
-    gap: 0.2em;
-    text-decoration: none;
+  padding: 9px 10px;
+  display: flex;
+  gap: 0.2em;
+  text-decoration: none;
 }
 
-.btn > img{
-    padding: 0.5em 0.5em;
-    cursor: pointer;
+.btn > img {
+  padding: 0.5em 0.5em;
+  cursor: pointer;
 }
 
 .disabled {
@@ -27,37 +27,36 @@
   cursor: not-allowed;
 }
 
-input[type="button"]{
-    cursor: pointer;
+input[type="button"] {
+  cursor: pointer;
 }
 
-
-.header{
+.header {
   gap: 0.5rem;
-  height: 85px;  
+  height: 85px;
 }
 
 .nav > ul {
   gap: 2rem;
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
 
-.input-text{
+.input-text {
   font-size: 16px;
   padding: 9px 10px;
 }
 
-.input-sm{
+.input-sm {
   width: 280px;
   font-size: 16px;
   padding: 9px 10px;
 }
 
-.input-search{
+.input-search {
   width: 360px;
 }
 
@@ -84,8 +83,7 @@ a{
   margin: 5rem;
 }
 
-
-.toast-notification{
+.toast-notification {
   position: fixed;
   bottom: 2.5rem;
   right: 2.5rem;
