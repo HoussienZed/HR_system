@@ -17,8 +17,8 @@ Route::group(['prefix' => 'v1'], function () {
         })
 
 
-        Route::group(["prefix" => "HR", "middleware" => "isHR"], function(){
-            // Route::get('/dashboard', [DashboardController::class, "dashboard"]);
+        Route::group(["prefix" => "HR", "middleware" => "isHR"], function () {
+            //Route::get('/dashboard', [DashboardController::class, "dashboard"]);
 
         });
         
