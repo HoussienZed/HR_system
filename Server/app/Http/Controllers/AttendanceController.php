@@ -14,24 +14,29 @@ class AttendanceController extends Controller
         $user = Auth::user();
         $latitude = $request->latitude;
         $longitude = $request->longitude;
-        // Validate input
+
+        // validation
         if (!$latitude || !$longitude) {
             return response()->json([
                 'success' => false,
                 'message' => 'Latitude and longitude are required.'
             ]);
         }
-        // Prevent multiple clock-ins on the same day
+
+
         $alreadyClockedIn = Attendance::where('user_id', $user->id)
             ->whereNotNull('clock_in')
             ->whereNull('clock_out')
             ->first();
+
         if ($alreadyClockedIn) {
             return response()->json([
                 'success' => false,
                 'message' => 'You have already clocked in today.'
             ]);
         }
+
+
         // Get employee's approved work location
         $location = RemoteWorkLocation::where('user_id', $user->id)->first();
         if (!$location) {
@@ -40,6 +45,7 @@ class AttendanceController extends Controller
                 'message' => 'No approved work location found.'
             ]);
         }
+
         // Calculate the distance between current and approved location
         $distance = $this->haversineDistance(
             $latitude,
@@ -47,7 +53,8 @@ class AttendanceController extends Controller
             $location->latitude,
             $location->longitude
         );
-        // :closed_lock_with_key: Hardcoded radius in meters
+
+
         $radius = 300;
         if ($distance > $radius) {
             return response()->json([
@@ -57,20 +64,14 @@ class AttendanceController extends Controller
             ]);
         }
 
-        // $location = new RemoteWorkLocation();
 
         // Save attendance record
         $attendance = new Attendance();
         $attendance->user_id = $user->id;
         $attendance->clock_in = now();
-
-        // $location->latitude = $latitude;
-        // $location->longitude = $longitude;
-        // $attendance->latitude = $latitude;
-        // $attendance->longitude = $longitude;
-        // $attendance->location_verified = true;
         $attendance->save();
-        // $location->save();
+
+
         return response()->json([
             'success' => true,
             'message' => 'Clocked in successfully.',
@@ -79,7 +80,7 @@ class AttendanceController extends Controller
         ]);
     }
 
-    public function clockOut(Request $request)
+    public function clockOut()
     {
         $user = Auth::user();
 
