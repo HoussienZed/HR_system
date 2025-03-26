@@ -22,6 +22,8 @@ Route::group(['prefix' => 'v1'], function(){
             //leave request routes for HR
             Route::get('upcoming-leaves', [LeaveRequestController::class, 'getUpcomingLeaves']);
             Route::patch('/{id}/status', [LeaveRequestController::class, 'UpdateStatus']);
+            Route::get('/pending', [LeaveRequestController::class, 'getPendingRequests']);
+            Route::get('top-users-leaves', [LeaveRequestController::class, 'getTopUsersWithLeaveInfo']);
 
             //leave balance routes for HR
             Route::get('/all-balances', [LeaveBalanceController::class, 'getAllUsersLeaveBalances']);

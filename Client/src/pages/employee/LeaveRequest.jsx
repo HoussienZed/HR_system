@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
-import Input from "../../../component/others/Input";
-import Button from "../../../component/others/Button";
-import "./styles.css";
-import getBaseURL from "../../../utils/getBaseURL";
+import axiosBaseUrl from "../../utils/axios";
+import Input from "../../component/others/Input";
+import Button from "../../component/others/Button";
+import "../../assets/styles/EmployeeLeave.css";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const LeaveRequest = () => {
   const id = localStorage.getItem("id");
-  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     user_id: id,
     leave_type: "",
@@ -21,21 +22,23 @@ const LeaveRequest = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${getBaseURL()}/Employees/leave-request`, form, {
-        headers: {
-          "Content-Type": "application/json",
-
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(response.data);
+      await axiosBaseUrl.post("/Employees/leave-request", form);
     } catch (error) {
       console.error("There was an error!", error);
     }
   };
 
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   return (
-    <section className="container login_signup_section">
+    <section className="container login_signup_section flex flex-column">
+      <div className="leave-return leave-return">
+        <button onClick={() => navigate("/employeeleaves")}>Request Leave</button>
+      </div>
       <form className="bg-primary body2">
         <h2 className="text-white h2">Leave Request</h2>
         <select

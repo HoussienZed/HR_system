@@ -10,8 +10,14 @@ import EditBenefits from "./pages/employee/EditBenefits";
 import RetirementCalculator from "./pages/employee/RetirementCalculator";
 import Attendance from "./pages/employee/Attendance";
 import { getUserType } from "./utils/getUserType";
-import Employees from "./pages/Hr/Employees";
-import LeaveRequest from "./pages/employee/LeaveRequest/index";
+
+import Employees from "./pages/hr/Employees";
+import LeaveRequest from "./pages/employee/LeaveRequest";
+import EmployeeLeave from "./pages/employee/EmployeeLeave";
+import LeaveOverview from "./pages/Hr/LeaveOverview";
+import LeaveApproval from "./pages/Hr/LeaveApproval";
+
+
 
 
 const App = () => {
@@ -27,7 +33,7 @@ const App = () => {
     { icon: "ScanEye", label: "Reviews", to: "../reviews" },
     { icon: "SquareCheckBig", label: "Leave Approval", to: "../leaveapproval" },
     { icon: "NotebookText", label: "Leave Overview", to: "../leaveoverview" },
-    { icon: "BookText", label: "Training Overview", to: "../trainingoverview" },
+    // { icon: "BookText", label: "Training Overview", to: "../trainingoverview" },
     {
       icon: "Landmark",
       label: "Retirement Calculator",
@@ -37,11 +43,11 @@ const App = () => {
 
   const employeeSidebarItems = [
     { icon: "SquareCheckBig", label: "Leaves", to: "../employeeleaves" },
-    {
-      icon: "BookText",
-      label: "Training Portal",
-      to: "../trainingportal",
-    },
+    // {
+    //   icon: "BookText",
+    //   label: "Training Portal",
+    //   to: "../trainingportal",
+    // },
     { icon: "HandCoins", label: "Payroll", to: "../employeepayroll" },
     { icon: "Ambulance", label: "Benefits", to: "../benefitsdashboard" },
     {
@@ -75,6 +81,7 @@ const App = () => {
               <Route path="/editbenefits" element={<EditBenefits />} />
               <Route path="/retirementcalculator" element={<RetirementCalculator />} />
               <Route path="/leaveRequest" element={<LeaveRequest />} />
+              <Route path="/employeeleaves" element={<EmployeeLeave />} />
             </Route>
 
             {/*routes for HRs access only */}
@@ -90,6 +97,8 @@ const App = () => {
                 <Route path="/payrolldashboard" element={<PayrollDashboard />}></Route>
                 <Route path="/employees" element={<Employees />}></Route>
                 <Route path="/payrolldashboard" element={<PayrollDashboard />}></Route>
+                <Route path="/leaveOverview" element={<LeaveOverview />} />
+                <Route path="/leaveApproval" element={<LeaveApproval />} />
               </Route>
             </Route>
           </Route>
