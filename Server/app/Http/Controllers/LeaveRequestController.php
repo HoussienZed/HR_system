@@ -84,4 +84,13 @@ class LeaveRequestController extends Controller
         $leaveRequests = LeaveRequest::where('user_id', $userId)->get();
         return messageResponse(true, 'Fetched leave requests successfully', 201, $leaveRequests);
     }
+
+    public function getPendingRequests()
+    {
+        $pendingRequests = LeaveRequest::where('status', 'pending')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return messageResponse(true, 'Fetched pending leave requests successfully', 201, $pendingRequests);
+    }
 }
