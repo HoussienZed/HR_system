@@ -10,11 +10,15 @@ import EditBenefits from "./pages/employee/EditBenefits";
 import RetirementCalculator from "./pages/employee/RetirementCalculator";
 import Attendance from "./pages/employee/Attendance";
 import { getUserType } from "./utils/getUserType";
+
 import Employees from "./pages/hr/Employees";
 import LeaveRequest from "./pages/employee/LeaveRequest";
 import EmployeeLeave from "./pages/employee/EmployeeLeave";
 import LeaveOverview from "./pages/Hr/LeaveOverview";
 import LeaveApproval from "./pages/Hr/LeaveApproval";
+
+
+
 
 const App = () => {
   const type = getUserType();
