@@ -17,6 +17,7 @@ Route::group(['prefix' => 'v1'], function () {
         //authorized Users
         Route::group(["prefix" => "Employees"], function () {
             Route::post('/clockIn', [AttendanceController::class, "clockIn"]);
+            Route::post('/clockOut', [AttendanceController::class, "clockOut"]);
         });
     });
 
