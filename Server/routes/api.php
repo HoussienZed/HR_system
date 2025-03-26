@@ -22,9 +22,9 @@ Route::group(['prefix' => 'v1'], function () {
             Route::patch('/{id}/status', [LeaveRequestController::class, 'UpdateStatus']);
 
             //leave balance routes for HR
-            Route::get('/all', [LeaveBalanceController::class, 'getAllUsersLeaveBalances']); // Get all users' leave balances
-            Route::get('/totals', [LeaveBalanceController::class, 'getTotalBalanceByType']); // Get total balance per leave type
-            Route::get('/overall', [LeaveBalanceController::class, 'getOverallTotalBalance']);
+            Route::get('/all-balances', [LeaveBalanceController::class, 'getAllUsersLeaveBalances']);
+            Route::get('/overall-balance', [LeaveBalanceController::class, 'getOverallTotalBalance']);
+            Route::get('/total-type-balance', [LeaveBalanceController::class, 'getTotalBalanceByType']);
         });
 
         //Unauthorized Users
