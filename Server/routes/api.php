@@ -30,12 +30,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(["prefix" => "HR"], function () {
             // Route::group(["prefix" => ""], function () {});
             Route::get('/employees', [EmployeeController::class, 'index']);
-        })
-
-
-        Route::group(["prefix" => "HR", "middleware" => "isHR"], function () {
-            //Route::get('/dashboard', [DashboardController::class, "dashboard"]);
-
         });
 
         //Authorized Users
@@ -58,6 +52,7 @@ Route::group(['prefix' => 'v1'], function () {
     //Unauthenticated Users
     Route::post('/login', [AuthController::class, "login"])->name('login');
     Route::post('/signup', [AuthController::class, "signup"])->name('signup');
+});
 });
 
 // Route::post('/login', [AuthController::class, "login"])->name('login');
