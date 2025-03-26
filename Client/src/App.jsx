@@ -11,6 +11,7 @@ import RetirementCalculator from "./pages/employee/RetirementCalculator";
 import Attendance from "./pages/employee/Attendance";
 import { getUserType } from "./utils/getUserType";
 import Employees from "./pages/hr/Employees";
+import LeaveRequest from "./pages/employee/LeaveRequest/index";
 
 const App = () => {
   const type = getUserType();
@@ -62,26 +63,17 @@ const App = () => {
               element={
                 <>
                   {/* <SideBar navItems={employeeSidebarItems} /> */}
-                  <SideBar
-                    navItems={
-                      type === "hr" ? hrSidebarItems : employeeSidebarItems
-                    }
-                  />
+                  <SideBar navItems={type === "hr" ? hrSidebarItems : employeeSidebarItems} />
                   <Outlet />
                 </>
               }
             >
               <Route path="employeepayroll" element={<EmployeePayroll />} />
               <Route path="/attendance" element={<Attendance />} />
-              <Route
-                path="/benefitsdashboard"
-                element={<BenefitsDashboard />}
-              />
+              <Route path="/benefitsdashboard" element={<BenefitsDashboard />} />
               <Route path="/editbenefits" element={<EditBenefits />} />
-              <Route
-                path="/retirementcalculator"
-                element={<RetirementCalculator />}
-              />
+              <Route path="/retirementcalculator" element={<RetirementCalculator />} />
+              <Route path="/leaveRequest" element={<LeaveRequest />} />
             </Route>
 
             {/*routes for HRs access only */}
@@ -94,11 +86,9 @@ const App = () => {
                   </>
                 }
               >
-                <Route
-                  path="/payrolldashboard"
-                  element={<PayrollDashboard />}
-                ></Route>
+                <Route path="/payrolldashboard" element={<PayrollDashboard />}></Route>
                 <Route path="/employees" element={<Employees />}></Route>
+                <Route path="/payrolldashboard" element={<PayrollDashboard />}></Route>
               </Route>
             </Route>
           </Route>
