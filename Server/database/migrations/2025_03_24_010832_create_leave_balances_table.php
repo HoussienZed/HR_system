@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->enum('leave_type', ['annual', 'sick', 'unpaid', 'maternity', 'paternity']);
-            $table->decimal('balance', 10, 2);
+            $table->decimal('balance', 10, 2)->default(10);
             $table->timestamps();
         });
     }
