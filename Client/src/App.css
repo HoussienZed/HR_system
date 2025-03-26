@@ -6,12 +6,12 @@
   background-color: red;
 }
 .btn > p {
-    padding: 0.5em 0.7em;
+    padding: 9px 10px;
     display: flex;
     gap: 0.2em;
 }
 .btn > a {
-    padding: 0.5em 0.7em;
+    padding: 9px 10px;
     display: flex;
     gap: 0.2em;
     text-decoration: none;
@@ -20,6 +20,11 @@
 .btn > img{
     padding: 0.5em 0.5em;
     cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 input[type="button"]{
@@ -41,6 +46,50 @@ a{
   color: inherit;
 }
 
+.input-text{
+  font-size: 16px;
+  padding: 9px 10px;
+}
+
+.input-sm{
+  width: 280px;
+  font-size: 16px;
+  padding: 9px 10px;
+}
+
+.input-search{
+  width: 360px;
+}
+
 /* a:visited{
   color: white;
 } */
+
+/* MODAL STYLES */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 50;
+}
+
+.modal {
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 16px;
+  position: relative;
+  margin: 5rem;
+}
+
+
+.toast-notification{
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  width: fit-content;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+}

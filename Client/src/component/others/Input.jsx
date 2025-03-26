@@ -9,11 +9,11 @@ const Input = ({
   className,
   required,
 }) => {
-  const classNames = className;
+  const classNames = className + " input-text text-black rounded-lg text-black";
   const label_classNames = label_className;
   return label ? (
-    <div className="w-full">
-      <label htmlFor={name} className={`${label_classNames}`}>
+    <div className="w-full flex flex-column">
+      <label htmlFor={name} className={`font-bold ${label_classNames}`}>
         {label}
       </label>
       <input
@@ -22,7 +22,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`${classNames}`}
+        className={`mt-2 ${classNames}`}
         required={required}
       />
     </div>

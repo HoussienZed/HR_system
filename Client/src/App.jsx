@@ -9,8 +9,11 @@ import BenefitsDashboard from "./pages/employee/BenefitsDashboard";
 import EditBenefits from "./pages/employee/EditBenefits";
 import RetirementCalculator from "./pages/employee/RetirementCalculator";
 import Attendance from "./pages/employee/Attendance";
+import { getUserType } from "./utils/getUserType";
+import Employees from "./pages/hr/Employees";
 
 const App = () => {
+  const type = getUserType();
   const hrSidebarItems = [
     { icon: "LayoutDashboard", label: "Dashboard", to: "../dashboard" },
     {
@@ -51,14 +54,19 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           {/*Public route for the landing page */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
 
           {/*protected routes, only users access */}
           <Route element={<ProtectedRoutes />}>
             <Route
               element={
                 <>
-                  <SideBar navItems={employeeSidebarItems} />
+                  {/* <SideBar navItems={employeeSidebarItems} /> */}
+                  <SideBar
+                    navItems={
+                      type === "hr" ? hrSidebarItems : employeeSidebarItems
+                    }
+                  />
                   <Outlet />
                 </>
               }
@@ -90,6 +98,7 @@ const App = () => {
                   path="/payrolldashboard"
                   element={<PayrollDashboard />}
                 ></Route>
+                <Route path="/employees" element={<Employees />}></Route>
               </Route>
             </Route>
           </Route>
