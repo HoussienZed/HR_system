@@ -28,7 +28,7 @@ class DeductLeaveBalance
         //get the number of days for the leave
         $startDate = new \Carbon\Carbon($leaveRequest->start_date);
         $endDate = new \Carbon\Carbon($leaveRequest->end_date);
-        $requestedDays = $startDate->diffInDays($endDate);
+        $requestedDays = $startDate->diffInDays($endDate) -;
 
         //find the record of the user's leave balance
         $leaveBalance = LeaveBalance::where('user_id', $leaveRequest->user_id)

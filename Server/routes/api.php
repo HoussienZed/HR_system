@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\RemoteWorkLocationController;
+use App\Models\LeaveRequest;
 
 Route::group(['prefix' => 'v1'], function () {
     //Authorized Users

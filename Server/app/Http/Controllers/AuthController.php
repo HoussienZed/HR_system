@@ -30,23 +30,16 @@ class AuthController extends Controller
         return messageResponse(true, "Login Successful", 200, $user);
     }
 
-    function signup(Request $request){
-        try{
+    function signup(Request $request)
+    {
+        try {
             $request->validate([
                 'full-name' => 'required|string|max:30',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8',
             ]);
-    
-            $user = new User; 
-    function signup(Request $request)
-    {
-        try {
-            // $request->validate([
-            //     'full-name' => 'required|string|max:30',
-            //     'email' => 'required|string|email|max:255|unique:users',
-            //     'password' => 'required|string|min:8',
-            // ]);
+
+            $user = new User;
 
             $user = new User;
             // $user->name = $request["full-name"];
@@ -58,7 +51,9 @@ class AuthController extends Controller
             $user->medical_plan_id = 1;
             $user->save();
             $user->token = Auth::login($user);
+
             event(new UserRegistered($user));
+
             return messageResponse(true, "User created successfully", 200, $user);
         } catch (Throwable $e) {
             return errorMessageResponse(false, "False credentials", $e->getMessage(), 401);
