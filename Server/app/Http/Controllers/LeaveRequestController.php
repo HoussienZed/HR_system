@@ -10,31 +10,39 @@ class LeaveRequestController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'leave_type' => 'required|in:annual,sick,unpaid,maternity,paternity',
-            'start_date' => 'required|date|after_or_equal:today',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'reason' => 'nullable|string',
-        ]);
+        try {
+            $request->validate([
+                'user_id' => 'required|exists:users,id',
+                'leave_type' => 'required|in:annual,sick,unpaid,maternity,paternity',
+                'start_date' => 'required|date|after_or_equal:today',
+                'end_date' => 'required|date|after_or_equal:start_date',
+                'reason' => 'nullable|string',
+            ]);
 
-        //the carbon turns the date to a string
-        $startDate = new \Carbon\Carbon($request->start_date);
-        $endDate = new \Carbon\Carbon($request->end_date);
-        $requestedDays = $startDate->diffInDays($endDate) + 1;
+            //the carbon turns the date to a string
+            $startDate = new \Carbon\Carbon($request->start_date);
+            $endDate = new \Carbon\Carbon($request->end_date);
+            $requestedDays = $startDate->diffInDays($endDate) + 1;
 
-        //check if user has enough leave balance
-        $leaveBalance = LeaveBalance::where('user_id', $request->user_id)
-            ->where('leave_type', $request->leave_type)
-            ->first();
+            //check if user has enough leave balance
+            $leaveBalance = LeaveBalance::where('user_id', $request->user_id)
+                ->where('leave_type', $request->leave_type)
+                ->first();
 
-        if (!$leaveBalance || $leaveBalance->balance < $requestedDays) {
-            return errorMessageResponse(false, 'Insufficient balance error ', 'You dont have enough leave balance for' . $request->leave_type, 400);
+            if (!$leaveBalance || $leaveBalance->balance < $requestedDays) {
+                return errorMessageResponse(false, 'Insufficient balance error ', 'You dont have enough leave balance for ' . $request->leave_type, 400);
+            }
+
+            $leaveRequest = LeaveRequest::create($request->all());
+
+            return messageResponse(true, 'Leave request submitted successfully', 201, $leaveRequest);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Server error',
+                'message' => $e->getMessage()
+            ], 500);
         }
-
-        $leaveRequest = LeaveRequest::create($request->all());
-
-        return messageResponse(true, 'Leave request submitted successfully', 201, $leaveRequest);
     }
 
     public function index()
