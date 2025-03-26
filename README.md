@@ -16,7 +16,7 @@ HR Flow System is a structured process that manages employee-related tasks throu
 
 Install HR-Flow with Github
 
-```bash
+```sh
   Git clone https://github.com/HoussienZed/HR_system.git
 ```
 
@@ -44,7 +44,7 @@ As an Employee:
 
 #### Get all items
 
-```http
+```
   GET /api/items
 ```
 
@@ -54,7 +54,7 @@ As an Employee:
 
 #### Get item
 
-```http
+```
   GET /api/items/${id}
 ```
 
