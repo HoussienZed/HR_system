@@ -11,7 +11,17 @@ const RetirementCalculator = () => {
   const [retirementAmount, setRetirementAmount] = useState("");
 
   const handleRetirementCalculation = () => {
-    setRetirementAmount();
+    if (workStartingDate && workEndingDate && lastBasicSalary) {
+      const yearsOfWork =
+        new Date(workEndingDate).getFullYear() -
+        new Date(workStartingDate).getFullYear();
+      const calculatedAmount = (
+        yearsOfWork *
+        parseFloat(lastBasicSalary) *
+        0.6
+      ).toFixed(2);
+      setRetirementAmount(calculatedAmount);
+    }
   };
 
   return (
