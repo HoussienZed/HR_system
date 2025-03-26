@@ -186,14 +186,14 @@ const Attendance = () => {
               />
             </div>
             <div>
-              <p className="text-sm text-gray-700">
+              <p>
                 {clockedIn
                   ? "✅ You have successfully clocked in."
                   : "🕒 You have not clocked in yet."}
               </p>
 
               {latitude && longitude && (
-                <p className="text-sm text-gray-500 mt-2">
+                <p className="mt-2">
                   📍 Your location: {latitude.toFixed(5)},{" "}
                   {longitude.toFixed(5)}
                 </p>
