@@ -11,7 +11,7 @@ import RetirementCalculator from "./pages/employee/RetirementCalculator";
 import Attendance from "./pages/employee/Attendance";
 import { getUserType } from "./utils/getUserType";
 
-import Employees from "./pages/hr/Employees";
+import Employees from "./pages/Hr/Employees";
 import LeaveRequest from "./pages/employee/LeaveRequest";
 import EmployeeLeave from "./pages/employee/EmployeeLeave";
 import LeaveOverview from "./pages/Hr/LeaveOverview";
