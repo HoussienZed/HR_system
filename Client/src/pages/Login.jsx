@@ -32,11 +32,6 @@ const Login = () => {
           email,
           password,
         },
-        // {
-        //   headers: {
-        //     Accept: "application/json",
-        //   },
-        // }
       );
       if (response.data.success == true) {
         localStorage.setItem("id", response.data.data.id);
@@ -73,7 +68,7 @@ const Login = () => {
           className={"body2"}
         />
         <Button
-          text={"Login up"}
+          text={"Login"}
           onClick={handleLogin}
           className={"w-full"}
           bgColor="bg-secondary"
