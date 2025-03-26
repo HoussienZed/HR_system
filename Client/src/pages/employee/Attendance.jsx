@@ -2,21 +2,17 @@ import SectionTitle from "../../component/others/SectionTitle";
 import Section from "../../component/layout/Section";
 import attendanceSvg from "../../assets/attendance-svg.svg";
 import Button from "../../component/others/Button";
-import UsersTable from "../../component/others/users-table/index";
 import { useState } from "react";
-import axios from "axios";
+import axiosBaseUrl from "../../utils/axios";
 import { X } from "lucide-react";
-
-let protocol = "http://";
-let host = "localhost:8080";
-let path = "/hr-system/server/clockIn";
-
-const url = protocol + host + path;
+import "../../App.css";
 
 const Attendance = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [clockedIn, setClockedIn] = useState(false);
+  const [clockedIn, setClockedIn] = useState(
+    localStorage.getItem("clockIn") ? true : false
+  );
   const [toast, setToast] = useState({
     message: "",
     success: true,
@@ -38,38 +34,28 @@ const Attendance = () => {
         setLongitude(lon);
 
         try {
-          const response = await axios.post(
-            url,
-            {
-              latitude: lat,
-              longitude: lon,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-                Accept: "application/json",
-              },
-            }
-          );
+          const response = await axiosBaseUrl.post("/Employees/clockIn", {
+            latitude: lat,
+            longitude: lon,
+          });
 
           if (response.data.success) {
             setClockedIn(true);
+            localStorage.setItem("clockIn", true);
             setToast({
               message: "Clocked in successfully",
               success: true,
               visible: true,
             });
           } else {
-            // alert("Error " + response.data.message);
             setToast({
-              message: "response.data.message",
+              message: response.data.message + " " + clockedIn,
               success: false,
               visible: true,
             });
           }
         } catch (error) {
           console.error("Clock-in error:", error);
-          // alert("Something went wrong while clocking in.");
           setToast({
             message: "Something went wrong while clocking in.",
             success: false,
@@ -79,7 +65,6 @@ const Attendance = () => {
       },
       (error) => {
         console.error("Geolocation error:", error);
-        // alert("Could not get your location.");
         setToast({
           message: "Could not get your location.",
           success: false,
@@ -101,11 +86,18 @@ const Attendance = () => {
                 text={"Clock In"}
                 fontSize="body2"
                 onClick={handleClockIn}
+                disabled={clockedIn}
+                className={clockedIn ? "disabled" : ""}
               />
             </div>
             <div className="flex gap-16 w-full justify-between items-center">
               <h3>Clock out:</h3>
-              <Button text={"Clock Out"} fontSize="body2" />
+              <Button
+                text={"Clock Out"}
+                fontSize="body2"
+                disabled={!clockedIn}
+                className={!clockedIn ? "disabled" : ""}
+              />
             </div>
             <div>
               <p className="text-sm text-gray-700">
@@ -126,9 +118,6 @@ const Attendance = () => {
             <img src={attendanceSvg} alt="Attendance Illustration" />
           </div>
         </div>
-        {/* <div className="mt-8">
-          <UsersTable />
-        </div> */}
       </Section>
 
       {/* Toast Notification */}
