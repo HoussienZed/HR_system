@@ -1,0 +1,95 @@
+name: Deploy React and Laravel to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy-React:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Check Node.js version
+        run: node -v
+
+      - name: Check npm version
+        run: npm -v
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./Client  
+
+      - name: Build React app
+        run: npm run build
+        working-directory: ./Client
+
+      - name: Copy dist folder to root
+        run: |
+          cp -r ./Client/dist ./dist
+          
+      - name: Check dist directory
+        run: ls -al ./dist  
+
+      - name: Create tar archive
+        run: |
+          tar -czf build.tar.gz dist
+        working-directory: ./  
+
+      - name: Copy build to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST_PRODUCTION }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: "build.tar.gz"
+          target: "/home/${{ secrets.EC2_USER }}/build.tar.gz"
+
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            echo "Unpacking and deploying..."
+            tar -xzf /home/${{ secrets.EC2_USER }}/build.tar.gz/build.tar.gz -C /var/www/html/HR_system/Client
+            # tar -xzf /home/${{ secrets.EC2_USER }}/build.tar.gz -C /var/www/html/HR_system/Client
+            sudo rm -rf /home/${{ secrets.EC2_USER }}/build.tar.gz
+            sudo systemctl restart apache2
+            echo "Deployment completed!"
+
+  deploy-Laravel:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3
+
+        - name: Deploy on EC2
+          uses: appleboy/ssh-action@v0.1.10
+          with:
+            host: ${{ secrets.EC2_HOST_PRODUCTION }}
+            username: ${{ secrets.EC2_USER }}
+            key: ${{ secrets.EC2_KEY }}
+            script: |
+              cd /var/www/html/HR_system/
+              git pull origin main
+              cd Server/
+              cp .env.example .env
+              php artisan key:generate
+              php artisan config:clear
+              php artisan cache:clear
+              php artisan route:clear
+              php artisan view:clear
+              php artisan config:cache
+              php artisan route:cache
+              php artisan view:cache
+              php artisan migrate --force
