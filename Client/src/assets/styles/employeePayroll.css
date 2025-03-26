@@ -1,0 +1,27 @@
+.payroll-details {
+    width: 70%;
+    height: 90%;
+    padding-right: var(--container-padding-x);
+    padding-left: var(--container-padding-x);
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 2rem;
+    border-radius: 8px;
+}
+
+.employee-payroll-title {
+    margin-top: 2em;
+}
+
+.payroll-details h1 {
+    margin-bottom: 2.5em;
+    margin-top: 0.5em;
+}
+
+.payroll-details-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+}
