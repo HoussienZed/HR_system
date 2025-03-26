@@ -5,6 +5,7 @@ import Button from "../../component/others/Button";
 import UsersTable from "../../component/others/users-table/index";
 import { useState } from "react";
 import axios from "axios";
+import { X } from "lucide-react";
 
 let protocol = "http://";
 let host = "localhost:8080";
@@ -16,6 +17,11 @@ const Attendance = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [clockedIn, setClockedIn] = useState(false);
+  const [toast, setToast] = useState({
+    message: "",
+    success: true,
+    visible: false,
+  });
 
   const handleClockIn = async () => {
     if (!navigator.geolocation) {
@@ -48,18 +54,37 @@ const Attendance = () => {
 
           if (response.data.success) {
             setClockedIn(true);
-            alert("Success: " + response.data.message);
+            setToast({
+              message: "Clocked in successfully",
+              success: true,
+              visible: true,
+            });
           } else {
-            alert("Error " + response.data.message);
+            // alert("Error " + response.data.message);
+            setToast({
+              message: "response.data.message",
+              success: false,
+              visible: true,
+            });
           }
         } catch (error) {
           console.error("Clock-in error:", error);
-          alert("Something went wrong while clocking in.");
+          // alert("Something went wrong while clocking in.");
+          setToast({
+            message: "Something went wrong while clocking in.",
+            success: false,
+            visible: true,
+          });
         }
       },
       (error) => {
         console.error("Geolocation error:", error);
-        alert("Could not get your location.");
+        // alert("Could not get your location.");
+        setToast({
+          message: "Could not get your location.",
+          success: false,
+          visible: true,
+        });
       }
     );
   };
@@ -105,6 +130,26 @@ const Attendance = () => {
           <UsersTable />
         </div> */}
       </Section>
+
+      {/* Toast Notification */}
+      {toast.visible && (
+        <div
+          className={`toast-notification ${
+            toast.success ? "toast-success" : "toast-error"
+          }`}
+        >
+          <div className="flex justify-between w-full">
+            <h4 className="font-bold">{toast.success ? "Success" : "Error"}</h4>
+            <div
+              className="flex justify-end cursor-pointer"
+              onClick={() => setToast({ ...toast, visible: false })}
+            >
+              <X />
+            </div>
+          </div>
+          <p className="text-body4">{toast.message}</p>
+        </div>
+      )}
     </>
   );
 };
