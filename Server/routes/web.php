@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// Route::get('/', function () {
+//     return redirect('/api/v1'); // Or some other meaningful response
+// });
+
 Route::get('/', function () {
-    return redirect('/api/v1'); // Or some other meaningful response
+    return response()->json('API is working', 200);
 });
