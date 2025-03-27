@@ -1,5 +1,3 @@
-/* import { BrowserRouter } from "react-router-dom"; */
-/* import SideNavbar from "../../component/side-navbar"; */
 import {
   BadgeDollarSign,
   CircleUserRound,
@@ -17,7 +15,7 @@ import { UserRoundPen } from "lucide-react";
 
 const PayrollDashboard = () => {
   const [search, setSearch] = useState("");
-  /* const [employees, setEmployees] = useState([]); */
+  const [employees, setEmployees] = useState([]);
 
   const columns = [
     { key: "full_name", header: "Employee Name" },
@@ -29,6 +27,7 @@ const PayrollDashboard = () => {
     { key: "status", header: "Status" },
   ];
 
+  /*Demo data for testing 
   const employees = [
     {
       id: 1,
@@ -60,7 +59,7 @@ const PayrollDashboard = () => {
       salary: "1500",
       status: "active",
     },
-  ];
+  ]; */
 
   const actions = [
     {
@@ -69,14 +68,14 @@ const PayrollDashboard = () => {
     },
   ];
 
-  /*  useEffect(() => {
+  useEffect(() => {
     const fetchEmployees = async () => {
-      const response = await axiosBaseUrl.get("/employees");
-      setEmplyees(response.data);
+      const response = await axiosBaseUrl.get("/HR/employees");
+      setEmployees(response.data);
       setLoading(false);
     };
     fetchEmployees();
-  }, []); */
+  }, []);
 
   const filteredEmployees = employees.filter((employee) =>
     employee.full_name.toLowerCase().includes(search.toLowerCase())

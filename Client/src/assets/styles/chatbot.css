@@ -1,0 +1,63 @@
+.chatbot{
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    border-radius: 50%;
+}
+
+.chatbot-icon{
+    border-radius: 50%;
+    border: 1px solid #28252a;
+    cursor: pointer;
+    width: inherit;
+}
+
+.chatbot-window{
+    width: 500px;
+    border-radius: 8px;
+    line-height: 1.5;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.window-header{
+    padding: 1rem 1rem 
+}
+.window-body{
+    padding: 1rem 1rem;
+    height: 480px;
+}
+
+.user-message-sent{
+    padding: 1rem;
+    width: 85%;
+    border-radius: 8px;
+}
+
+.replay-message{
+    padding: 1rem;
+    width: 85%;
+    border-radius: 8px;
+}
+
+.all-past-conservation{
+    overflow-y: scroll;
+}
+
+.chatbot-window .input-box{
+    /* width: 100px; */
+    height: 132px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    margin-top: 8px;
+}
+
+.send-icon{
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+}
+

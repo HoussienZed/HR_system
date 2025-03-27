@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserRegistered;
 use Throwable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller{
-    public function login(Request $request){
+class AuthController extends Controller
+{
+    public function login(Request $request)
+    {
 
         $request->validate([
             'email' => 'required|string|email',
@@ -18,14 +21,13 @@ class AuthController extends Controller{
 
         $token = Auth::attempt($credentials);
         if (!$token) {
-            return errorMessageResponse(false, "Access Error", "Unauthorized Access", 401);            
+            return errorMessageResponse(false, "Access Error", "Unauthorized Access", 401);
         }
 
         $user = Auth::user();
-        $user->token=$token;
+        $user->token = $token;
         // die($user);
         return messageResponse(true, "Login Successful", 200, $user);
-
     }
 
     function signup(Request $request){
@@ -51,13 +53,15 @@ class AuthController extends Controller{
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
 
         Auth::logout();
         return messageResponse(true, "Successfully logged out", 200);
     }
 
-    public function refresh(){
+    public function refresh()
+    {
 
         $token = Auth::refresh();
         $user = Auth::user();

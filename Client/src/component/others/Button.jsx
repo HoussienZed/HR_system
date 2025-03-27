@@ -8,7 +8,8 @@ const Button = ({
   link_className,
   bgColor = "bg-primary",
   textColor = "text-white",
-  fontSize = "body4",
+  fontSize = "body3",
+  disabled,
 }) => {
   const classNames =
     className + " " + bgColor + " " + textColor + " " + fontSize;
@@ -20,6 +21,8 @@ const Button = ({
           className={`btn flex flex-center ${classNames}`}
           onClick={onClick}
           type="submit"
+          disabled={disabled}
+          // disabled
         >
           <Link to={path} className={`${link_classNames}`}>
             {text}
@@ -29,6 +32,8 @@ const Button = ({
         <button
           className={`btn flex flex-center ${classNames}`}
           onClick={onClick}
+          disabled={disabled}
+          // disabled
         >
           <p>{text}</p>
         </button>
