@@ -10,6 +10,7 @@ import {
   BookText,
   Landmark,
   Ambulance,
+  Clock8,
 } from "lucide-react";
 import logo from "../../../assets/logo.png";
 
@@ -24,6 +25,7 @@ const SideBar = ({ navItems = [] }) => {
     BookText: <BookText />,
     Landmark: <Landmark />,
     Ambulance: <Ambulance />,
+    Clock8: <Clock8 />,
   };
 
   return (
