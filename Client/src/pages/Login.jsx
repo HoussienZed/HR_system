@@ -39,9 +39,9 @@ const Login = () => {
         localStorage.setItem("token", response.data.data.token);
 
         if(response.data.data.user_type === "HR"){
-          navigate("Hr/Employees");
+          navigate("Employees");
         } else {
-          navigate("/employee/Attendance");
+          navigate("/Attendance");
           // navigate("/Home");
         }
 
