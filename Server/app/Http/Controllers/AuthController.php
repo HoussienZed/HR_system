@@ -30,35 +30,35 @@ class AuthController extends Controller
         return messageResponse(true, "Login Successful", 200, $user);
     }
 
-    // function signup(Request $request)
-    // {
-    //     try {
-    //         $request->validate([
-    //             'full-name' => 'required|string|max:30',
-    //             'email' => 'required|string|email|max:255|unique:users',
-    //             'password' => 'required|string|min:8',
-    //         ]);
+    function signup(Request $request)
+    {
+        try {
+            $request->validate([
+                'full-name' => 'required|string|max:30',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8',
+            ]);
 
-    //         $user = new User;
+            $user = new User;
 
-    //         $user = new User;
-    //         // $user->name = $request["full-name"];
-    //         $user->full_name = $request["full_name"];
-    //         $user->email = $request["email"];
-    //         $user->password = bcrypt($request["password"]);
-    //         $user->department_id = 1;
-    //         $user->position_id = 1;
-    //         $user->medical_plan_id = 1;
-    //         $user->save();
-    //         $user->token = Auth::login($user);
+            $user = new User;
+            // $user->name = $request["full-name"];
+            $user->full_name = $request["full_name"];
+            $user->email = $request["email"];
+            $user->password = bcrypt($request["password"]);
+            $user->department_id = 1;
+            $user->position_id = 1;
+            $user->medical_plan_id = 1;
+            $user->save();
+            $user->token = Auth::login($user);
 
-    //         event(new UserRegistered($user));
+            event(new UserRegistered($user));
 
-    //         return messageResponse(true, "User created successfully", 200, $user);
-    //     } catch (Throwable $e) {
-    //         return errorMessageResponse(false, "False credentials", $e->getMessage(), 401);
-    //     }
-    // }
+            return messageResponse(true, "User created successfully", 200, $user);
+        } catch (Throwable $e) {
+            return errorMessageResponse(false, "False credentials", $e->getMessage(), 401);
+        }
+    }
 
     public function logout()
     {

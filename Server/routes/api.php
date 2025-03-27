@@ -43,9 +43,7 @@ Route::group(['prefix' => 'v1'], function(){
 
         });
 
-        Route::post('/askGemini', [AiQueryController::class, "askGemini"]);
-
-          
+            Route::post('/askGemini', [AiQueryController::class, "askGemini"]);
             //leave reques routes for employee
             Route::post('/leave-request', [LeaveRequestController::class, 'store']);
             Route::get('/leave-requests/user/{userId}', [LeaveRequestController::class, 'getUserLeaveRequests']);
@@ -55,12 +53,12 @@ Route::group(['prefix' => 'v1'], function(){
         });
 
     
+        Route::post('/login', [AuthController::class, "login"])->name('login');
+        Route::post('/signup', [AuthController::class, "signup"])->name('signup');
 
     });
 
     //Unauthenticated Users
-    Route::post('/login', [AuthController::class, "login"])->name('login');
-});
+// });
 
-// Route::post('/signup', [AuthController::class, "signup"])->name('signup');
 // Route::post('/login', [AuthController::class, "login"])->name('login');
