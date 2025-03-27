@@ -10,6 +10,10 @@ use App\Http\Controllers\RemoteWorkLocationController;
 use App\Models\LeaveRequest;
 use App\Http\Controllers\EmployeeController;
 
+Route::get('/', function() {
+    return response()->json(['message' => 'API is working']);
+});
+
 Route::group(['prefix' => 'v1'], function(){
     //Authorized Users
     Route::group(["middleware" => "auth:api"], function () {
