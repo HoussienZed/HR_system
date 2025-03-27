@@ -10,12 +10,13 @@ import EditBenefits from "./pages/employee/EditBenefits";
 import RetirementCalculator from "./pages/employee/RetirementCalculator";
 import Attendance from "./pages/employee/Attendance";
 import { getUserType } from "./utils/getUserType";
-
+import Chatbot from "./component/others/chatbot";
 import Employees from "./pages/Hr/Employees";
 import LeaveRequest from "./pages/employee/LeaveRequest";
 import EmployeeLeave from "./pages/employee/EmployeeLeave";
 import LeaveOverview from "./pages/Hr/LeaveOverview";
 import LeaveApproval from "./pages/Hr/LeaveApproval";
+
 
 
 
@@ -39,6 +40,11 @@ const App = () => {
       label: "Retirement Calculator",
       to: "../retirementcalculator",
     },
+    {
+      icon: "Clock8",
+      label: "Attendance",
+      to: "../attendance",
+    },
   ];
 
   const employeeSidebarItems = [
@@ -54,6 +60,11 @@ const App = () => {
       icon: "Landmark",
       label: "Retirement Calculator",
       to: "../retirementcalculator",
+    },
+    {
+      icon: "Clock8",
+      label: "Attendance",
+      to: "../attendance",
     },
   ];
 
@@ -96,6 +107,7 @@ const App = () => {
               >
                 <Route path="/payrolldashboard" element={<PayrollDashboard />}></Route>
                 <Route path="/employees" element={<Employees />}></Route>
+                <Route path="/attendance" element={<Attendance />} />
                 <Route path="/payrolldashboard" element={<PayrollDashboard />}></Route>
                 <Route path="/leaveOverview" element={<LeaveOverview />} />
                 <Route path="/leaveApproval" element={<LeaveApproval />} />
@@ -105,6 +117,7 @@ const App = () => {
           {/* </Route> */}
         </Routes>
       </BrowserRouter>
+      <Chatbot />
     </>
   );
 };

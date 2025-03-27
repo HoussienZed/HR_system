@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AiQuery;
+use App\Http\Controllers\AiQueryController;
 use App\Http\Controllers\LeaveBalanceController;
 use App\Http\Controllers\LeaveRequestController;
 use Illuminate\Http\Request;
@@ -38,6 +40,11 @@ Route::group(['prefix' => 'v1'], function(){
             Route::post('/clockIn', [AttendanceController::class, "clockIn"]);
             Route::post('/clockOut', [AttendanceController::class, "clockOut"]);
             Route::post('/addRemoteLocation', [RemoteWorkLocationController::class, "addRemoteLocation"]);
+
+        });
+
+        Route::post('/askGemini', [AiQueryController::class, "askGemini"]);
+
           
             //leave reques routes for employee
             Route::post('/leave-request', [LeaveRequestController::class, 'store']);
@@ -48,6 +55,7 @@ Route::group(['prefix' => 'v1'], function(){
         });
 
     
+
     });
 
     //Unauthenticated Users
