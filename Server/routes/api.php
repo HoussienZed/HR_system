@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AiQuery;
+use App\Http\Controllers\AiQueryController;
 use App\Http\Controllers\LeaveBalanceController;
 use App\Http\Controllers\LeaveRequestController;
 use Illuminate\Http\Request;
@@ -29,9 +31,8 @@ Route::group(['prefix' => 'v1'], function(){
             Route::get('/all-balances', [LeaveBalanceController::class, 'getAllUsersLeaveBalances']);
             Route::get('/overall-balance', [LeaveBalanceController::class, 'getOverallTotalBalance']);
             Route::get('/total-type-balance', [LeaveBalanceController::class, 'getTotalBalanceByType']);
-        Route::group(["prefix" => "HR"], function () {
-            // Route::group(["prefix" => ""], function () {});
             Route::get('/employees', [EmployeeController::class, 'index']);
+
         });
 
         //Authorized Users
@@ -39,6 +40,11 @@ Route::group(['prefix' => 'v1'], function(){
             Route::post('/clockIn', [AttendanceController::class, "clockIn"]);
             Route::post('/clockOut', [AttendanceController::class, "clockOut"]);
             Route::post('/addRemoteLocation', [RemoteWorkLocationController::class, "addRemoteLocation"]);
+
+        });
+
+        Route::post('/askGemini', [AiQueryController::class, "askGemini"]);
+
           
             //leave reques routes for employee
             Route::post('/leave-request', [LeaveRequestController::class, 'store']);
@@ -48,13 +54,13 @@ Route::group(['prefix' => 'v1'], function(){
             Route::get('/user/{userId}', [LeaveBalanceController::class, 'getUserLeaveBalance']);
         });
 
+    
+
     });
 
     //Unauthenticated Users
     Route::post('/login', [AuthController::class, "login"])->name('login');
-    Route::post('/signup', [AuthController::class, "signup"])->name('signup');
-
-});
 });
 
+// Route::post('/signup', [AuthController::class, "signup"])->name('signup');
 // Route::post('/login', [AuthController::class, "login"])->name('login');

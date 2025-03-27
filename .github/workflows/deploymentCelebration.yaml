@@ -1,0 +1,25 @@
+name: Deployment Slack Message
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify-resolve:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Post text to a Slack channel
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
+          payload: |
+            channel: "#fse_3334_team4"
+            text: |
+              🎉**Deployment Completed on ${{ github.ref_name }} branch! Keep Going TEAM**🚀
+              - **Commit Number:** `${{ github.sha }}`
+              - **Commit Message:** `${{ github.event.head_commit.message }}`
+              - **Committed by:** `${{ github.actor }}`
+              - **Commit URL:** https://github.com/${{ github.repository }}/commit/${{ github.sha }}
