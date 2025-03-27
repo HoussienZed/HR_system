@@ -27,24 +27,21 @@ const Login = () => {
     form.append("password", password);
 
     try {
-      const response = await axiosBaseUrl.post(path,
-        {
-          email,
-          password,
-        },
-      );
+      const response = await axiosBaseUrl.post(path, {
+        email,
+        password,
+      });
       if (response.data.success == true) {
         localStorage.setItem("id", response.data.data.id);
         localStorage.setItem("full_name", response.data.data.full_name);
         localStorage.setItem("token", response.data.data.token);
 
-        if(response.data.data.user_type === "HR"){
-          navigate("Hr/Employees");
+        if (response.data.data.user_type === "HR") {
+          navigate("Employees");
         } else {
-          navigate("/employee/Attendance");
+          navigate("Attendance");
           // navigate("/Home");
         }
-
       } else {
         console.log("Login failed:", response.data.message);
       }
