@@ -11,6 +11,7 @@ import RetirementCalculator from "./pages/employee/RetirementCalculator";
 import Attendance from "./pages/employee/Attendance";
 import { getUserType } from "./utils/getUserType";
 import Employees from "./pages/hr/Employees";
+import Chatbot from "./component/others/chatbot";
 
 const App = () => {
   const type = getUserType();
@@ -31,6 +32,11 @@ const App = () => {
       label: "Retirement Calculator",
       to: "../retirementcalculator",
     },
+    {
+      icon: "Clock8",
+      label: "Attendance",
+      to: "../attendance",
+    },
   ];
 
   const employeeSidebarItems = [
@@ -46,6 +52,11 @@ const App = () => {
       icon: "Landmark",
       label: "Retirement Calculator",
       to: "../retirementcalculator",
+    },
+    {
+      icon: "Clock8",
+      label: "Attendance",
+      to: "../attendance",
     },
   ];
 
@@ -99,12 +110,14 @@ const App = () => {
                   element={<PayrollDashboard />}
                 ></Route>
                 <Route path="/employees" element={<Employees />}></Route>
+                <Route path="/attendance" element={<Attendance />} />
               </Route>
             </Route>
           </Route>
           {/* </Route> */}
         </Routes>
       </BrowserRouter>
+      <Chatbot />
     </>
   );
 };
