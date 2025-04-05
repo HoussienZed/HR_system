@@ -9,7 +9,6 @@ const EmployeePayroll = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Replace this with your actual API call to fetch employee payroll data
     const fetchEmployeePayroll = async () => {
       try {
         const response = await axiosBaseUrl.get("/HR/employees");
