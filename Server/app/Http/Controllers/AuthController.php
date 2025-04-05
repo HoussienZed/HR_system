@@ -30,19 +30,22 @@ class AuthController extends Controller
         return messageResponse(true, "Login Successful", 200, $user);
     }
 
-    function signup(Request $request)
-    {
-        try {
+    function signup(Request $request){
+        
+        try{
             $request->validate([
                 'full-name' => 'required|string|max:30',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8',
             ]);
 
+
             $user = new User;
 
             $user = new User;
             // $user->name = $request["full-name"];
+    
+            $user = new User; 
             $user->full_name = $request["full_name"];
             $user->email = $request["email"];
             $user->password = bcrypt($request["password"]);
